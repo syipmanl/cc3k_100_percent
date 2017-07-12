@@ -1,0 +1,39 @@
+CS246 Final Project Checklist
+
+Pre-project
+
+__ Submit group.txt during assignment 4.
+
+__ Check that group shows up on Marmoset.
+
+
+Due Date 1
+
+__ Submit plan of attack to correct project for due date 1.
+
+__ Submit uml for due date 1.
+
+__ Download and check all submissions from due date 1 from marmoset.
+
+
+Due Date 2
+
+__ Submit project code for due date 2. 
+
+__ Submit design document for due date 2.
+
+__ Submit uml for due date 2.
+
+__ Submit bonus file for due date 2 (if applicable).
+
+__ Download and check all pdfs for due date 2 from marmoset.
+
+__ Download project code from marmoset. Compile and run code.
+
+    __ Makefile not in a directory when unzipped.
+
+    __ Check the last submission is the latest code.
+
+    __ Check all required files are included. E.g. text files to run the game.
+
+    __ Re-zip files and submit if any changes are made. Download project from marmoset and check again
