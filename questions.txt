@@ -2,5 +2,4 @@ Q1: Can monster attack monsters? When they pass through a 1x10 chamber?
 
 Q2: Monsters can't stay still right? (+0,+0)
 
-Q4: In page 4, so character spawned on the first floor at the beginning not randomly amongst 5, right?
 
