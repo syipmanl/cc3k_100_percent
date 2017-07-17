@@ -1,0 +1,10 @@
+Q1: Can monster attack monsters?
+
+Q2: Black for text and red for answer in plan.pdf? Nvm, it is submitted.
+
+Q3: What does mean by human drops two normal(value two) piles of gold? Does it mean that there are two blocks represented by 'G'?
+
+Q4: In page 4, so character spawned on the first floor at the beginning not randomly amongst 5, right?
+
+Q5: A player attacks an enemy, the enemy is killed, the player doesn't automatically move over to its tile right?
+		The 
