@@ -2,11 +2,14 @@
 #define __GAMESYSTEM_H__
 #include "map.h"
 
+using std::string;
+using std::ofstream;
 class GameSystem {
 	Map *mp;
 
-	GameSystem();
 public:
+    
+        GameSystem();
 		void loadMap(const string map_name); //translates the file to Map
 		//void gameInit(); //might not needed
 		void playGame();
@@ -20,6 +23,6 @@ public:
 
 		ofstream *SaveGame(); // writes the current progress to a save file
 		
-}
+};
 #endif
 

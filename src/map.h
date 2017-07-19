@@ -3,17 +3,18 @@
 
 #include <fstream>
 #include <vector>
-#include "cell.h"
+#include "tile.h"
 #include "textdisplay.h"
+#include "floor.h"
 
 using std::vector;
 using std::ostream;
+using std::ifstream;
 
 class Map {
-	vector<vector<Cell*>> theMap; //The Actual Map
-	TextDisplay *td;
+	vector<Floor> floors;
 
-	void reset();
+	TextDisplay *td;
 
 public:
 
@@ -22,6 +23,6 @@ public:
 
 	
 	friend ostream &operator<<(ostream &out, const Map &m);
-}
+};
 
 #endif

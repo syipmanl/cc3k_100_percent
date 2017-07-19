@@ -7,7 +7,6 @@ using namespace std;
 
 string DEFAUL_MAP="layout_empty.txt";
 
-// prints the usage of executing this file
 void usage() {
 	cerr << "Usage: cc3k [OPTION] [MAP]\nSee Help\n cc3k -h" << endl;
 }
@@ -25,7 +24,7 @@ void help() {
 
 int main(int argc, char *argv[]) {
 	typedef int OPTION;
-	enum {Default=0, LoadfromGame, LoadMap, Help};
+	enum {Default=0, LoadMap, LoadfromGame, Help};
 
 	OPTION option;
 	
@@ -37,12 +36,12 @@ int main(int argc, char *argv[]) {
 			option=Help; 
 		} else if (arg1=="--map"||arg1=="-m") {
 			option=LoadMap;
-			if (argv!=3) {
+			if (argc!=3) {
 				cerr<<"Incorrect number of arguments"<<endl;usage();exit(1);
 			}
 		} else if (arg1=="--load"||arg1=="-l") {
 			option=LoadfromGame;
-			if (argv!=3) {
+			if (argc!=3) {
 				cerr<<"Incorrect number of arguments"<<endl;usage();exit(1);
 			}
 		} else {

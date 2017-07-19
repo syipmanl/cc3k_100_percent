@@ -1,9 +1,12 @@
 #include "gamesystem.h"
 #include <fstream>
 
+using std::string;
+using std::ofstream;
+
 GameSystem::GameSystem():mp{nullptr}{}
 
-GameSystem::loadMap(const string map_name) {
+void GameSystem::loadMap(const string map_name) {
 	ifstream map_file{"maps/"+map_name};
 	// read into textdisplay
 	// read into map 
@@ -12,7 +15,7 @@ GameSystem::loadMap(const string map_name) {
 	// initialize everything here before the character is spawned
 }
 
-GameSystem::playGame() {
+void GameSystem::playGame() {
 	// most interface here
 	// 0. intro, help, doc, saved game
 	//
@@ -39,4 +42,4 @@ void GameSystem::printGame() {}
 
 // bonus
 void GameSystem::loadGame(const string saved_name) {}
-ofstream *SaveGame()
+ofstream *GameSystem::SaveGame() {}

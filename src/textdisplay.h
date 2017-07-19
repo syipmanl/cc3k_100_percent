@@ -2,14 +2,14 @@
 #define __TEXTDISPLAY_H__
 
 #include <vector>
-#include "oberver.h"
+#include "observer.h"
 
 using std::vector;
 using std::ostream;
 
 class TextDisplay: public Observer {
 	
-	vector<vector<char *> theDisplay;
+	vector<vector<char *>> theDisplay;
 	
 public:
 	TextDisplay();

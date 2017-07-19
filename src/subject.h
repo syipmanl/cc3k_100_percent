@@ -3,6 +3,8 @@
 
 #include <vector>
 #include "subscriptions.h"
+#include "observer.h"
+
 using std::vector;
 
 
@@ -17,6 +19,8 @@ public:
 };
 
 #endif
+
+
 
 
 
