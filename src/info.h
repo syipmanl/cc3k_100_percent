@@ -2,6 +2,7 @@
 #define __INFO_H__
 #include <string>
 
+using std::string;
 struct Info{
     int row, col;
     string type;

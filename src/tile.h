@@ -10,6 +10,7 @@ class Tile: public Subject, public Observer{
 	
 
 public:
+    Tile(const int c, const int r, const string name);
 
 
 };

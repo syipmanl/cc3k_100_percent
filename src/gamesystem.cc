@@ -1,6 +1,7 @@
 #include "gamesystem.h"
 #include <fstream>
 
+#include "map.h"
 using std::string;
 using std::ofstream;
 
@@ -8,6 +9,8 @@ GameSystem::GameSystem():mp{nullptr}{}
 
 void GameSystem::loadMap(const string map_name) {
 	ifstream map_file{"maps/"+map_name};
+    mp = new Map(map_file); 
+    
 	// read into textdisplay
 	// read into map 
 	// read into chambers

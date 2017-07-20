@@ -4,7 +4,6 @@
 #include <fstream>
 #include <vector>
 #include "tile.h"
-#include "textdisplay.h"
 #include "floor.h"
 
 using std::vector;
@@ -12,13 +11,13 @@ using std::ostream;
 using std::ifstream;
 
 class Map {
-	vector<Floor> floors;
+	vector<Floor *> floors;
 
-	TextDisplay *td;
 
 public:
-
-	Map(const ifstream * map_file);
+        // initialize the Map using map_file
+	Map(ifstream & map_file); 
+    
 	~Map();
 
 	
