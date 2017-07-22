@@ -16,6 +16,7 @@ class Floor {
 	vector<Enemey *> enemies;
 	vector<Chamber *> chambers;
 
+   // void simple_initialize_chamber();
 public:
     Floor(int floor_num,TextDisplay *tp);
 	Chamber * random_available_chamber();

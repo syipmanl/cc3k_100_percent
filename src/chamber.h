@@ -5,6 +5,7 @@ class Chamber {
 	vector<Tile *> tiles;
 	
 public:
+    bool attachUniqueTile(Tile *);
 	Info random_available_tile();
 };
 
