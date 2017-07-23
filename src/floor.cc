@@ -41,16 +41,17 @@ Floor::Floor(int floor_num, TextDisplay* tp):floor_num{floor_num},td{tp}{
     vector<string> *display=td->getDisplay();
     for (int i=0;i<display->size();i++) {
        for (int j=0;j<(*display).at(i).size();j++) {
-           Tile *thetile=thefloor[i][j];
-           Tile *north=((*display).at(i-1).at(j)=='.')?thefloor[i-1][j]:nullptr;
-           Tile *south=((*display).at(i+1).at(j)=='.')?thefloor[i+1][j]:nullptr;
-           Tile *east=((*display).at(i).at(j+1)=='.')?thefloor[i][j+1]:nullptr;
-           Tile *west=((*display).at(i).at(j-1)=='.')?thefloor[i][j-1]:nullptr;
-           Tile *northeast=((*display).at(i-1).at(j+1)=='.')?thefloor[i-1][j+1]:nullptr;
-           Tile *northwest=((*display).at(i-1).at(j-1)=='.')?thefloor[i-1][j-1]:nullptr;
+           Tile *thetile=thefloor[i][j]; // out of range problemhere !O*U(*Y#*(@!Y#(*!@U
+           /
+           Tile *north=((*display).at(i-1).at(j)=='.')? thefloor[i-1][j]:nullptr;
+           Tile *south=((*display).at(i+1).at(j)=='.')? thefloor[i+1][j]:nullptr;
+           Tile *east=((*display).at(i).at(j+1)=='.')? thefloor[i][j+1]:nullptr;
+           Tile *west=((*display).at(i).at(j-1)=='.')? thefloor[i][j-1]:nullptr;
+           Tile *northeast=((*display).at(i-1).at(j+1)=='.')? thefloor[i-1][j+1]:nullptr;
+           Tile *northwest= ((*display).at(i-1).at(j-1)=='.') ? thefloor[i-1][j-1] : nullptr;
            Tile *southeast=((*display).at(i+1).at(j+1)=='.')?thefloor[i+1][j+1]:nullptr;
            Tile *southwest=((*display).at(i+1).at(j-1)=='.')?thefloor[i+1][j-1]:nullptr;
-           thetile=translate(i,j,(*display).at(i).at(j));
+           thetile=translate(i,j,(*display).at(i).at(j)); // access to object here 09281u739217038122
            if (north) thetile->attach(north);
            if (south) thetile->attach(south);
            if (east) thetile->attach(east);

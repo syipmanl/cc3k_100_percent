@@ -9,7 +9,7 @@ using std::vector;
 using std::ostream;
 
 class Floor {
-    int floor_num;
+    int floor_num; // may not need it
     TextDisplay *td;
 	
 	vector<vector< Tile *>> thefloor;
