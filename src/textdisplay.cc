@@ -19,6 +19,9 @@ vector<string> *TextDisplay::getDisplay(){
 
 void TextDisplay::notify(Tile &whoNotified) {}
 
+void TextDisplay::set(const int r, const int c, const char ch) {
+    tdDisplay[r][c]=ch;
+}
 
 ostream &operator<<(ostream &out, const TextDisplay &td) {
     for (int i=0;i<td.tdDisplay.size();i++) {

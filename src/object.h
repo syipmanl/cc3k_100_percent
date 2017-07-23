@@ -7,11 +7,15 @@ class Tile;
 
 class Object {
 	Tile * position;
-    string name;
-    string type;
-
+    string name; 
+    string type; // "hero", "enemy", "floorobject"
+    char symbol;
+    
 public:
+    char getSymbol();
+    string getType();
+    bool isFloorObject() const;
     Object(const string name);
-	// setPosition
+	void setPosition(Tile * pos);
 };
 #endif

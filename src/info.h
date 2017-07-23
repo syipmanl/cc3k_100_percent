@@ -7,5 +7,5 @@ struct Info{
     int row, col;
     string type;
     
-}
+};
 #endif

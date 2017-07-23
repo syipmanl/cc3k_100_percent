@@ -11,19 +11,18 @@ class Object;
 // A Tile is a Cell+Subject+Observer-Object
 class Tile{
 	int row, col;
-	string name;
-	string type;
 	vector<Tile *> neightbours;
 	TextDisplay *td;
-    Object *ob;
+    Object *theObject;
 
 public:
-    Tile(const int r, const int c, const string name);
+    bool inChamber;
+    Tile(const int r, const int c);
     void attach(Tile* o);
-    void attachTd();
+    void attachTd(TextDisplay *td);
     void notifyTd();
-    virtual void notify(Tile whoNotified);
-    void notifynighbours(); //add more parameter
+    //virtual void notify(Tile whoNotified);
+    void cascade_the_chamber(); //add more parameter
     void setObject(Object *);
 	Info getInfo();
 

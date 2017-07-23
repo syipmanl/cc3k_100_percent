@@ -46,7 +46,7 @@ void GameSystem::playGame() {
     
     print_intro();
     
-    
+    bool already_has_hero_in_map;// where to put it
     print_selectHero();
     
     

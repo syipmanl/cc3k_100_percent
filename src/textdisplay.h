@@ -21,6 +21,7 @@ public:
     void addrow(const string line);
 	void notify(Tile &whoNotified) override;
 	
+    void set(const int r,const  int c,const char ch);
 	friend ostream &operator<<(ostream &out, const TextDisplay &td);
   //  friend Floor::Floor(int floor_num, TextDisplay *tp);
 };

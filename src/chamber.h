@@ -7,6 +7,7 @@ class Chamber {
 public:
     bool attachUniqueTile(Tile *);
 	Info random_available_tile();
+    void addTile(Tile *);
 };
 
 #endif

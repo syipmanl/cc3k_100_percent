@@ -3,6 +3,7 @@
 #include <vector>
 #include "tile.h"
 #include "enemy.h"
+#include "hero.h"
 #include "chamber.h"
 #include "textdisplay.h"
 using std::vector;
@@ -15,9 +16,10 @@ class Floor {
 	vector<vector< Tile *>> thefloor;
 	vector<Enemey *> enemies;
 	vector<Chamber *> chambers;
+    Hero * player;
 
-   // void simple_initialize_chamber();
 public:
+    bool hasHero();
     Floor(TextDisplay* tp);
 	Chamber * random_available_chamber();
 
