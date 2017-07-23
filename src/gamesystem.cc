@@ -5,17 +5,23 @@
 using std::string;
 using std::ofstream;
 
-GameSystem::GameSystem():mp{nullptr}{}
+GameSystem::GameSystem(Option option):mp{nullptr},op{option}{}
 
-void GameSystem::loadMap(const string map_name) {
-	ifstream map_file{"maps/"+map_name};
-    mp = new Map(map_file); 
-    
-	// read into textdisplay
-	// read into map 
-	// read into chambers
+void GameSystem::loadFile(const string file_name) {
+    if (op==Option::LoadEmptyMap) {
+        ifstream empty_map_file{"../maps/"+file_name};
+        mp = new Map(empty_map_file); 
+        
+        // read into textdisplay
+        // read into map 
+        // read into chambers
 
-	// initialize everything here before the character is spawned
+        // initialize everything here before the character is spawned
+    } else if (op==Option::LoadTestMap) {
+        ifstream test_map_file{"../tests/"+file_name};
+        mp = new Map(test_map_file); 
+    } else if (op==Option::LoadfromGame) {
+    }
 }
 
 void GameSystem::playGame() {
@@ -24,8 +30,7 @@ void GameSystem::playGame() {
 	//
 	// 1. choose character
 	// 2. Set up first floor
-	// On each floor
-	// Generates character in random chamber 
+	// On each floor // Generates character in random chamber 
 	// Generates stairway location
 	// Generates Potions
 	// Generates Gold
@@ -38,11 +43,11 @@ void GameSystem::playGame() {
 }
 
 
-
+/*
 // print the map to feel better
 void GameSystem::printGame() {}
 
 
 // bonus
 void GameSystem::loadGame(const string saved_name) {}
-ofstream *GameSystem::SaveGame() {}
+ofstream *GameSystem::SaveGame() {}*/
