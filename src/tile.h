@@ -1,17 +1,31 @@
-#ifndef __CELL_H__
-#define __CELL_H__ 
+#ifndef __TILE_H__
+#define __TILE_H__
 
 #include "info.h"
-#include "subject.h"
-#include "observer.h"
+#include <vector>
+#include "textdisplay.h"
+#include "object.h"
+using std::vector;
 
-class Tile: public Subject, public Observer{
-	int col, row;
-	
+class Object;
+// A Tile is a Cell+Subject+Observer-Object
+class Tile{
+	int row, col;
+	string name;
+	string type;
+	vector<Tile *> neightbours;
+	TextDisplay *td;
+    Object *ob;
 
 public:
-    Tile(const int c, const int r, const string name);
-
+    Tile(const int r, const int c, const string name);
+    void attach(Tile* o);
+    void attachTd();
+    void notifyTd();
+    virtual void notify(Tile whoNotified);
+    void notifynighbours(); //add more parameter
+    void setObject(Object *);
+	Info getInfo();
 
 };
 

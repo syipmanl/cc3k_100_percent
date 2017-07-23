@@ -39,6 +39,6 @@ int main(int argc, char *argv[]) {
     }
             
 	
-	GameSystem gs(file_name); // constructor
+	GameSystem gs(file_location); // constructor
     gs.playGame(); // game starts and ends here
 }

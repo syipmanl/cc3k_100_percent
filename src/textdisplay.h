@@ -3,13 +3,14 @@
 
 #include <vector>
 #include <string>
-#include "observer.h"
+#include "tile.h"
 
 using std::vector;
 using std::string;
 using std::ostream;
 
-class TextDisplay: public Observer {
+class Tile;
+class TextDisplay{
 	
 	vector<string> tdDisplay;
 	
@@ -18,8 +19,7 @@ public:
 	~TextDisplay(); // no use for now
     vector<string> * getDisplay();
     void addrow(const string line);
-	void notify(Subject &  whoNotified) override;
-	SubscriptionType subType() const override;
+	void notify(Tile &whoNotified) override;
 	
 	friend ostream &operator<<(ostream &out, const TextDisplay &td);
   //  friend Floor::Floor(int floor_num, TextDisplay *tp);

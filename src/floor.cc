@@ -2,8 +2,12 @@
 #include "tile.h"
 #include "floorobject.h"
 
-Tile *translate(int r, int c, char ch) {
-    
+
+bool isWall(const char c) {
+    return c=='|'||c=='-';
+}
+
+Object *translate(int r, int c, char ch) {
     if (ch=='.') {
         return new Air(r,c"air");
     } else if (ch=='|') {
@@ -35,23 +39,25 @@ void Floor::simple_initialize_chamber() {
 */
 
 
-Floor::Floor(int floor_num, TextDisplay* tp):floor_num{floor_num},td{tp}{
+Floor::Floor(TextDisplay* tp):td{tp}{
     
     // initalize thefloor using td
+    
     vector<string> *display=td->getDisplay();
-    for (int i=0;i<display->size();i++) {
-       for (int j=0;j<(*display).at(i).size();j++) {
-           Tile *thetile=thefloor[i][j]; // out of range problemhere !O*U(*Y#*(@!Y#(*!@U
-           /
-           Tile *north=((*display).at(i-1).at(j)=='.')? thefloor[i-1][j]:nullptr;
-           Tile *south=((*display).at(i+1).at(j)=='.')? thefloor[i+1][j]:nullptr;
-           Tile *east=((*display).at(i).at(j+1)=='.')? thefloor[i][j+1]:nullptr;
-           Tile *west=((*display).at(i).at(j-1)=='.')? thefloor[i][j-1]:nullptr;
-           Tile *northeast=((*display).at(i-1).at(j+1)=='.')? thefloor[i-1][j+1]:nullptr;
-           Tile *northwest= ((*display).at(i-1).at(j-1)=='.') ? thefloor[i-1][j-1] : nullptr;
-           Tile *southeast=((*display).at(i+1).at(j+1)=='.')?thefloor[i+1][j+1]:nullptr;
-           Tile *southwest=((*display).at(i+1).at(j-1)=='.')?thefloor[i+1][j-1]:nullptr;
-           thetile=translate(i,j,(*display).at(i).at(j)); // access to object here 09281u739217038122
+    int height=display->size();
+    int width=(*display).at(0).size();
+    for (int i=0;i<height;i++) {
+       for (int j=0;j<width;j++) {
+           Tile *thetile=thefloor[i][j]; 
+           Tile *north=(i-1>=0 && !isWall((*display).at(i-1).at(j)))? thefloor[i-1][j]:nullptr;  // if outofrange or Wall then nullptr
+           Tile *south=(i+1<height && !isWall((*display).at(i+1).at(j)))? thefloor[i+1][j]:nullptr;
+           Tile *east=(j+1<width && !isWall((*display).at(i).at(j+1)))? thefloor[i][j+1]:nullptr;
+           Tile *west=(j-1>=0 && !isWall((*display).at(i).at(j-1)))? thefloor[i][j-1]:nullptr;
+           Tile *northeast=(i-1>=0 && j+1<width && !isWall((*display).at(i-1).at(j+1)))? thefloor[i-1][j+1]:nullptr;
+           Tile *northwest=(i-1>=0 && j-1>=0 && isWall((*display).at(i-1).at(j-1))) ? thefloor[i-1][j-1] : nullptr;
+           Tile *southeast=(i+1<height && j+1<width && !isWall((*display).at(i+1).at(j+1)))?thefloor[i+1][j+1]:nullptr;
+           Tile *southwest=(i+1<height && j-1>=0 && !isWall((*display).at(i+1).at(j-1)))?thefloor[i+1][j-1]:nullptr;
+           thetile->setObject(translate(i,j,(*display).at(i).at(j))); 
            if (north) thetile->attach(north);
            if (south) thetile->attach(south);
            if (east) thetile->attach(east);

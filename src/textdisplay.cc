@@ -17,11 +17,8 @@ vector<string> *TextDisplay::getDisplay(){
     return &tdDisplay;
 }
 
-void TextDisplay::notify(Subject &whoNotified) {}
+void TextDisplay::notify(Tile &whoNotified) {}
 
-SubscriptionType subType(){
-    return SubscriptionType::All;
-}
 
 ostream &operator<<(ostream &out, const TextDisplay &td) {
     for (int i=0;i<td.tdDisplay.size();i++) {

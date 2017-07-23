@@ -15,13 +15,10 @@ class Map {
 
 
 public:
-        // initialize the Map using map_file
 	Map(ifstream & map_file); 
     
-	~Map();
-
-	
-	friend ostream &operator<<(ostream &out, const Map &m);
+	~Map(); // maybe not needed
+	friend ostream &operator<<(ostream &out, const Map &m); // print the map, haven't used yet
 };
 
 #endif

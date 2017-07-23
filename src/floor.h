@@ -9,7 +9,7 @@ using std::vector;
 using std::ostream;
 
 class Floor {
-    int floor_num; // may not need it
+   // int floor_num; // may not need it
     TextDisplay *td;
 	
 	vector<vector< Tile *>> thefloor;
@@ -18,7 +18,7 @@ class Floor {
 
    // void simple_initialize_chamber();
 public:
-    Floor(int floor_num,TextDisplay *tp);
+    Floor(TextDisplay* tp);
 	Chamber * random_available_chamber();
 
     friend ostream &operator<<(ostream &out, const Floor &fl);
