@@ -1,25 +1,45 @@
 #include "object.h"
 
+using namespace std;
 
-Object::Object(const string name) {
- if (name == "air"||name=="stair"||name=="door"||name=="passway"||name=="wall_vert"||name=="wall_hori") {
-	 type="floorobject";
- } else if (name=="shade"){ //To_DO
-     type="Hero";
- }
+Object::Object(string type, char symbol): type(type), symbol(symbol), position(NULL)
+{}
+ // if (name == "air"||name=="stair"||name=="door"||name=="passway"||name=="wall_vert"||name=="wall_hori") {
+	//  type="floorobject";
+ // } else if (name=="shade"){ //To_DO
+ //     type="Hero";
+ // }
+
+char Object::getSymbol(){
+	return symbol;
 }
 
-char Object::getSymbol(){return symbol;}
-void Object::setPosition(Tile * pos) {
-    position=pos;
+string Object::getType(){
+	return type;
 }
 
-bool Object::isFloorObject() const {
-    return type=="floorobject";
+void Object::setPosition(Tile * newpos) {
+    position = pos;
 }
 
-string Object::getType(){return type;}
-
-Info Object::getInfo(){
-    Info info=position->getInfo();
+Tile * getPosition() {
+	return position;
 }
+
+
+// Info Object::getInfo(){
+//     Info info=position->getInfo();
+// }
+
+Object::~Object() {}
+
+// public:
+//     Object(std::string type, char symbol);
+//     virtual ~Object() = 0;
+//     virtual std::string getRace() = 0;
+//     virtual char getSymbol();
+//     virtual string getType();
+//     virtual Tile* getPosition();
+// 	void setPosition(Tile * newpos);
+//     // Info getInfo();
+// };

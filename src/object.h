@@ -4,20 +4,27 @@
 
 #include "tile.h"
 #include "info.h"
+
+#include <string>
+
 class Tile;
 
 class Object {
-	Tile * position;
-    string name; 
-    string type; // "hero", "enemy", "floorobject"
-    char symbol;
+
+protected:
+    // string name; 
+    const std::string type; // "enemy", "hero"
+    const char symbol; // @, H, C
+    Tile * position;
     
 public:
-    char getSymbol();
-    string getType();
-    bool isFloorObject() const;
-    Object(const string name);
-	void setPosition(Tile * pos);
-    Info getInfo();
+    Object(std::string type, char symbol);
+    virtual ~Object() = 0;
+    virtual std::string getRace() = 0;
+    virtual char getSymbol();
+    virtual string getType();
+    virtual Tile* getPosition();
+	void setPosition(Tile * newpos);
+    // Info getInfo();
 };
 #endif
