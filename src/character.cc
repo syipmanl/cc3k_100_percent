@@ -3,219 +3,268 @@
 #include "enemy.h"
 #include "hero.h"
 #include "gold.h"
-#include <cmath>
+#include "utilities"
 #include <iostream>
 #include <sstream>
 
 using namespace std;
 
-Character::Character(int ATK, int DEF, int HP, string race, char symbol, string type) : Object(symbol, type), Atk(Atk), Def(Def), HP(HP), race(race) {
+Character::Character(int ATK, int DEF, int HP, 
+    int dif_atk, int dif_def, 
+    string race, char symbol, string type):
+
+Object(type, symbol), 
+
+ATK(ATK), DEF(DEF), HP(HP), dif_atk(dif_atk), dif_def(dif_def), race(race) {}
+
+void getHit() {
+    return hit;
 }
 
-Character::~Character() {}
 
-/**
- *  set Character Atk to n
- */
-void Character::setAtk(int n) {
-    Atk = n;
-    return;
-}
-
-/**
- *  set Character Def to n
- */
-void Character::setDef(int n) {
-    Def = n;
-    return;
-}
-
-/**
- *  set Character HP to n
- */
-void Character::setHP(int n) {
-    HP = n;
-    return;
-}
-
-/**
- * return Character Atk
- */
 int Character::getAtk() {
-    return Atk;
+    return ATK;
 }
 
-/**
- * return Character Def
- */
 int Character::getDef() {
-    return Def;
+    return DEF;
 }
 
-/**
- * return Character HP
- */
 int Character::getHP() {
     return HP;
 }
 
-/**
- * return Character Race
- */
 string Character::getRace() {
     return race;
 }
-
-void Character::usePotion(string effect) {
-    //
+string Character::getType() {
+    return type;
 }
-/**
- * move mthod
- * for d:int
- * 0: no, 1: we, 2: so, 3: ea
- * 4: nw, 5: ne, 6: sw, 7: se
- */
-void Character::move(int d) {
-    Cell* current = position;
-    Cell* destination = position->getNeighbour(d);
-    char destCh = destination->getCh();
 
-    Object* destObj = destination->getObject();
 
-    if(type != "player" && (destCh != '.' || destObj)){
-        return;
+// takes effect, modifies: dif_def/dif_atk -> DEF/ATK
+// remind to set zero when new floor
+void Character::usePotion(string effect) {
+    if(effect == "RH") {
+        HP = min(HP + 10, maxHP);
     }
-    else if(type == "player" && (destCh == '-' || destCh == '|' || destCh == ' ')){
-        return;
+    else if(effect == "BA") {
+        dif_atk += 5;
     }
-    else if(destObj && destObj->getType() == "stair"){
-        return;
+    else if(effect == "BD") {
+        dif_def += 5;
     }
-    else if(destObj && destObj->getType() == "potion"){
-        return;
+    else if(effect == "PH") {
+        HP = max(HP + 10, 0);
     }
-    else if(destObj && destObj->getType() == "treasure"){
-        if(static_cast<Treasure*>(destObj)->getDragon()){
-            return "A dragon is guarding its hoard. You can't take the treasure on ";
+    else if(effect == "WA") {
+        dif_atk -= 5;
+    }
+    else if(effect == "WD") {
+        dif_def -= 5;
+    }
+    ATK += dif_atk;
+    DEF -= dif_def;
+}
+
+// coverts direction into array index
+void Character::CharacterMove(string direction){
+    int index;
+    if     (direction == "no") index = 0;
+    else if(direction == "ea") index = 1;
+    else if(direction == "so") index = 2;
+    else if(direction == "we") index = 3;
+    else if(direction == "nw") index = 4;
+    else if(direction == "ne") index = 5;
+    else if(direction == "sw") index = 6;
+    else if(direction == "se") index = 7;
+    move(index);
+}
+
+// true if moved, false if not
+bool Character::move(int index) {
+    Tile* goal = position->getNeighbour(index); // set goal
+    Object* goalObj = goal->getObject(); // goalObj: goal's object
+
+    char goalCh = goal->getSymbol(); // goalCh: goal's symbol
+    string goalType = goal->getType(); // goalType: goal's type
+
+    bool moved; // true is moved, false is not moved
+
+ //   Tile* current = position;
+
+    if (type == "Hero") { // player is moving
+        if (goalCh == '.') { // free slot
+            moved = true;
+        } 
+        // else if(goalCh == '\\') {
+        //     // cover this case in gamesystem.cc
+        // }
+        else if(goalType == "Gold") { 
+            if(static_cast<Gold*>(goalObj)->DragonExist()) { // convert into gold*, not a dragon hoard
+                moved = false;
+            }
+            else { // pick up gold, not a dragon hoard
+                Hero* hero = static_cast<Hero *>(this); // set the hero
+                int drop = static_cast<Gold*>(goalObj)->getGold(); // set the money
+                hero->addGold(drop); // add the money!
+                delete goalObj; // delete the gold, had it's use
+                moved = true;
+            }
+        }
+        // if ((goalCh != '.' || goalType == "potion")
+        else  { // blocked by obstacles
+            moved = false;
+        }
+    }
+
+    if (type == "enemy") {
+        if(goalCh == '.') { // free tile
+            moved = true;
+        }
+        // ((goalCh != '.' || goalType == "potion")
+
+        else { // blocked by obstacles
+            moved = false;
+        }
+    }
+    if (moved) {
+        setPosition(goal); // new position is at goal
+        current->setObject(NULL); // old space points at null now
+        goal->setObject(this);
+    }  
+    return moved;
+}
+
+
+
+//change HP field, but still alive? 
+bool Character::Damaged(int n){
+    HP = min (HP - n, 0);
+    return (HP == 0);
+}
+
+// return true if defender is dead
+ bool Character::Attack(Character* defender) {
+    // get Attacker and Defender type and race;
+    string atk_Type = getType(); 
+    string def_Type = defender->getType();
+    string atk_Race = getRace();
+    string def_Race = defender->getRace();
+
+    // stats for calculation
+    int attack_stat = getAtk(); // attacker
+    int defence_stat = defender->getDef(); // defender
+    int dmg = ceil((100 / (100 + DEF)) * ATK); // dmg if applied
+    bool dead; // true if dead
+    int hit_miss = rand() % 2;
+
+    if(defRace == "Merchant"){
+        bool hostile = defender->getHostile();
+        if (Merchant::hostile) {
+            hit = true;
+            dead = defender->Damaged(dmg);
+        }
+        else {
+            Merchant::hostile = true;
+        }
+    }
+
+    // 
+    if(atk_Race == "Orc" && def_Race == "Goblin") { // (hero)orc attacks goblin
+        hit = true;
+        dead = defender->Damaged(ceil(dmg * 1.5));
+    }
+
+    // hero attacks halfling: 50/50 miss
+    if(atk_Type == "Hero" && def_Race == "Halfling") { // hero attacks halfling
+            if(hit_miss != 0) {
+                hit = false;
+                
+                // geneate hit attack message
+            }
+            else{
+                hit = true;
+                dead = defender->Damaged(dmg);
+                // generate miss damage message
+            }
+        }
+
+    // vampire attacks dwarf: lose 5 hp
+    // vampire attacks anyone else: get 5 hp
+    if(atkRace == "Vampire"){
+        if(defRace != "Dwarf"){
+            regen(5); // alex has to check if vampire hp = 0
         }
         else{
-            Player* player = static_cast<Player*>(this);
-            int value = static_cast<Treasure*>(destObj)->getValue();
-            player->addGold(value);
-            stringstream ss;
-            ss << value;
-            delete destObj;
+            Damaged(5); 
         }
-    }
-    else if(destObj){
-        return;
-    else if(type == "player"){
+        hit = true;
+        dead = defender->Damaged(dmg);
     }
 
-    setPosition(destination);
-    current->setObject(NULL);
-    destination->setObject(this);
+    // any other situation
+    if(atk_Type == "Enemy" && def_Type == "Hero") {
+            if(hit_miss != 0) {
+                hit = false;
+                hit = true;
+                dead = defender->Damaged(dmg);
+                // geneate hit attack message
+            }
+            else{
+                hit = true;
+                dead = defender->Damaged(dmg);
+                // generate miss damage message
+            }
+    }
+
+    if(atk_Type == "Hero" && def_Type == "Enemy") {
+        hit = true;
+        dead = defender->Damaged(dmg);
+    }
+    return dead;
 }
 
-/**
- *  reduce Character HP by n. HP can not drop under 0
- */
-void Character::takeDamage(int n){
-    HP = min (HP - n, 0);
+    // if(def_Race != "Drow" && atk_Race == "Elf") {
+
+    //     for (int i = 0; i < 2; i++) {
+    //         if(hit_miss == 0) {
+    //             dead = defender->Damaged(dmg);
+    //             // geneate hit attack message
+    //         }
+    //         else{
+    //             // generate miss damage message
+    //         }
+    //         //generate miss or hit message
+    //     }
+    // }
+
+    // if(defType == "player" &&) {
+
+    // }
+
+    // // calculate dmg
+
+    // // effect when Orc attack Goblin will magnified dmg by 1.5
 
 
-    return;
-}
 
-string intToString(int n);
-
-/**
- * this will delt damage to defender
- * return true if successfully attack, false if miss
- */
- void Character::Damage(Character* defender) {
-    // get Attacker and Defender type and race;
-    string atkType = getType();
-    string atkRace = getRace();
-    string defType = defender->getType();
-    string defRace = defender->getRace();
-
-    // state attacker and defender. "You" if it is player, race if it is enemy
-    string atkr = (atkType == "player" ? "You" : atkRace);
-    string defr = (defType == "player" ? "You" : defRace);
-
-    // combat outcome message
-
-    bool attacked = false;
-
-    // get Attacker Atk and Defender Def
-    double Atk = getAtk();
-    double Def = defender->getDef();
-
-    // dmg will be delt to defender
-    int dmg;
-
-    // HP after take dmg;
-    int hp;
-
-    atk__:
-    // use random number to check if miss
-    // only apply to case that defender is player or Halfling
-    if(defType == "player" || defRace == "Halfling"){
-        int chance = rand() % 2;
-        if(chance == 0) {
-            // generate miss attack message
-            goto endatk__;
-        }
-    }
-
-    // calculate dmg
-    dmg = ceil((100 / (100 + Def)) * Atk);
-
-    // effect when Orc attack Goblin will magnified dmg by 1.5
-    if(atkRace == "Orc" && defRace == "Goblin")
-        dmg = ceil(dmg * 1.5);
+    // // reduce defender HP
+    // defender->Damaged(dmg);
 
 
-    // reduce defender HP
-    defender->takeDamage(dmg);
-
-
-    // get HP after taking dmg;
-    hp = defender->getHP();
+    // // get HP after taking dmg;
+    // hp = defender->getHP();
 
 
     // generate attack message
    
-    if(hp == 0){
-    }
+    // if(hp == 0){
+    // }
 
     // effect for Vampire. Heal 5HP upon attacking or lost 5HP upon attacking dwarf
-    if(atkRace == "Vampire"){
-        // attack Drawf will cause lost 5 HP
-        if(defRace == "Dwarf"){
-            takeDamage(5);
-        }
-        // attack other races will gain 5 HP
-        else{
-            heal(5);
-        }
-    }
 
     // Merchant become hostile after being attacked
-    if(defRace == "Merchant"){
-        Merchant::hostile = true;
-    }
     
-    endatk__:
-    if(atkRace == "Elf" && defRace != "Drow" && !attacked){
-        attacked = true;
-        goto atk__;
-    }
+Character::~Character() {}
 
-
-}
-
-void Character::heal(int n){
-    return;
-}
