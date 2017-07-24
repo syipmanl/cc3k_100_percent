@@ -24,6 +24,7 @@ public:
     //virtual void notify(Tile whoNotified);
     void cascade_the_chamber(); //add more parameter
     void setObject(Object *);
+    void clearObject();
 	Info getInfo();
 
 };

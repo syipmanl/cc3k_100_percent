@@ -6,6 +6,9 @@
 using std::string;
 using std::ifstream;
 
+bool isboundary(const string);
+bool isOtherThan_air_space_Or_wall(const string);
+
 // check if the line is like
 // "|-----------------------------|"
 bool isboundary(const string line) {
@@ -19,6 +22,21 @@ bool isboundary(const string line) {
     return true;
 }
 
+
+// return true is the line has any character other than 
+bool isOtherThan_air_space_Or_wall(const string line) {
+    for (int i=0;i<line.size();i++) {
+        char c=line[i];
+        if (c=='|'||c=='-'||c==' '||c=='.') {
+            continue;
+        } else {
+            return true;
+        }
+    }
+    return false;
+}
+    
+
 // check if the line starts with SESSION
 bool isSavedGame(const string line) {
     return "SESSION"==line.substr(0,7);
@@ -30,13 +48,21 @@ void toggle(bool & b) {
 }
 
 
+int Map::get_num_Of_floor() {return floors.size();}
+
+bool Map::isEmpty() {
+    return isEmptyMap;
+}
+
 // load a Map or translate saved game into map 
 Map::Map(ifstream & map_file) {
+    isEmptyMap=true;
     bool in_a_floor=false;
     int floor_num=1;
 	string line;
     TextDisplay **tpp;
 	while (getline(map_file, line)) {
+        if (isOtherThan_air_space_Or_wall(line)) isEmptyMap=false;
         if (isSavedGame(line)) { // load from saved game
             
             //TO-DO

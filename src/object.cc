@@ -19,3 +19,7 @@ bool Object::isFloorObject() const {
 }
 
 string Object::getType(){return type;}
+
+Info Object::getInfo(){
+    Info info=position->getInfo();
+}

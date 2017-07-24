@@ -15,6 +15,8 @@ void Tile::cascade_the_chamber(){
     }
 }
 
+void Tile::clearObject(){delete theObject;}
+
 void Tile::setObject(Object *ob) {
    theObject = ob;
     if (!ob->isFloorObject()) {
@@ -27,4 +29,9 @@ void Tile::attach(Tile *o) {neightbours.push_back(o);}
 
 Info Tile::getInfo(){
     
+    Info info;
+    info.row=row;
+    info.col=col;
+    info.type=theObject->getType();
+    return info;
 }

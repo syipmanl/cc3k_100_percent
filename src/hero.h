@@ -12,7 +12,7 @@ protected:
 	const int DEF;
 	int dif_hp;
 	int dif_atk;
-	int dif_def
+	int dif_def;
 	int real_hp; 
 	int real_atk; 
 	int real_def; 
@@ -45,8 +45,8 @@ public:
 	virtual void regen(int hp);
 
 
-    virtual Hero* Hero::getHero();
-
+    virtual Hero* getHero();
+};
 // Shade: 120 HP, 25 Atk, 25 Def
 class Shade : public Hero{
 	public:

@@ -3,6 +3,7 @@
 
 
 #include "tile.h"
+#include "info.h"
 class Tile;
 
 class Object {
@@ -17,5 +18,6 @@ public:
     bool isFloorObject() const;
     Object(const string name);
 	void setPosition(Tile * pos);
+    Info getInfo();
 };
 #endif

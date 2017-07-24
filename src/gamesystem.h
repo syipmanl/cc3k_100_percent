@@ -6,7 +6,8 @@ using std::string;
 using std::ofstream;
 class GameSystem {
 	Map *mp; // a pointer to a Map
-    string herotype; // store the string of herotype
+	bool isWon();
+    bool isLost();
 
 public:
         GameSystem(const string file_location); // store the option usr makes

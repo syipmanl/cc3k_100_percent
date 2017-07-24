@@ -6,6 +6,7 @@
 #include "tile.h"
 #include "floor.h"
 
+
 using std::vector;
 using std::ostream;
 using std::ifstream;
@@ -13,10 +14,14 @@ using std::ifstream;
 class Map {
 	vector<Floor *> floors;
 
+    bool isEmptyMap;
+   
 
 public:
 	Map(ifstream & map_file); 
-    
+    int get_num_Of_floor();
+    bool isEmpty();
+    string herotype;
 	~Map(); // maybe not needed
 	friend ostream &operator<<(ostream &out, const Map &m); // print the map, haven't used yet
 };

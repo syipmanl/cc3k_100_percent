@@ -1,6 +1,3 @@
-
-
-
 #ifndef _ENEMY_H
 #define _ENEMY_H
 
