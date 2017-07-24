@@ -10,12 +10,13 @@
 using namespace std;
 
 Character::Character(int ATK, int DEF, int HP, 
-    int dif_atk, int dif_def, 
+    int dif_atk, int dif_def, bool hit,
     string race, char symbol, string type):
 
 Object(type, symbol), 
 
-ATK(ATK), DEF(DEF), HP(HP), dif_atk(dif_atk), dif_def(dif_def), race(race) {}
+ATK(ATK), DEF(DEF), HP(HP), dif_atk(dif_atk), 
+bool hit, dif_def(dif_def), race(race) {}
 
 void getHit() {
     return hit;

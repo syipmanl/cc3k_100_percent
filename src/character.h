@@ -12,7 +12,6 @@ protected:
 	int ATK;
 	int DEF;
 	int HP;
-    int dif_hp;
 	int dif_atk;
 	int dif_def
 	bool hit;
@@ -20,7 +19,7 @@ protected:
 
 public: 
 	
-	Character(int ATK, int DEF, int HP, int dif_hp, int dif_atk, int dif_def, 
+	Character(int ATK, int DEF, int HP, int dif_atk, int dif_def, bool hit
 		std::string race, char symbol, std::string type);
 	
 	virtual ~Character() = 0;
