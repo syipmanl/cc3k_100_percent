@@ -121,11 +121,12 @@ Floor::Floor(TextDisplay* tp):td{tp},thestair{nullptr},init_hero_pos{nullptr},th
     int width=(*display).at(0).size();
     thefloor.resize(height);
     for (int i=0;i<height;i++) {
-        thefloor.resize(width);
+        thefloor.at(i).resize(width);
     }
     for (int i=0;i<height;i++) {
        for (int j=0;j<width;j++) {
            Tile *thetile=&thefloor[i][j]; 
+           thetile->attach_td(td);       
            char ch=(*display).at(i).at(j);
            thetile->set_tile(i,j,ch);
            if (ch=='@') {
@@ -160,7 +161,6 @@ Floor::Floor(TextDisplay* tp):td{tp},thestair{nullptr},init_hero_pos{nullptr},th
            thetile->attach(northeast); // 5
            thetile->attach(southwest); // 6
            thetile->attach(southeast); // 7
-           thetile->attach_td(td);       
        }
     }
     

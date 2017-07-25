@@ -7,7 +7,6 @@ using std::string;
 using std::ifstream;
 
 bool isboundary(const string);
-bool isOtherThan_air_space_Or_wall(const string);
 
 // check if the line is like
 // "|-----------------------------|"
@@ -24,12 +23,10 @@ bool isboundary(const string line) {
 
 
 // return true is the line has any character other than 
-bool isOtherThan_air_space_Or_wall(const string line) {
+bool is_not_floor_object(const string line) {
     for (int i=0;i<line.size();i++) {
         char c=line[i];
-        if (c=='|'||c=='-'||c==' '||c=='.') {
-            continue;
-        } else {
+        if (c!='|'||c!='-'||c!=' '||c!='.'||c!='+'||c!='#') {
             return true;
         }
     }
@@ -51,7 +48,7 @@ void toggle(bool & b) {
 int Map::get_num_Of_floor() {return floors.size();}
 
 bool Map::isEmpty() {
-    return isEmptyMap;
+    return (isEmptyMap)? true:false;
 }
 
 // load a Map or translate saved game into map 
@@ -62,7 +59,7 @@ Map::Map(ifstream & map_file) {
 	string line;
     TextDisplay **tpp;
 	while (getline(map_file, line)) {
-        if (isOtherThan_air_space_Or_wall(line)) isEmptyMap=false;
+        if (is_not_floor_object(line)) isEmptyMap=false;
         if (isSavedGame(line)) { // load from saved game
             
             //TO-DO

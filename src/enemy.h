@@ -4,13 +4,14 @@
 #include "character.h"
 #include <string>
 
+
 class DragonHoard;
 
 class Enemy: public Character {
 private:
 
 public: 
-	Enemy(int Atk, int Def, int HP, char symbol, std::string race, std::string type, bool hit);
+	Enemy(int Atk, int Def, int HP, char symbol, std::string race, std::string type);
 	virtual ~Enemy() = 0;
 	virtual void drop_gold();
 };

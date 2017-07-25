@@ -6,7 +6,7 @@ using namespace std;
 
 string ASCII_DIR="../ascii_pictures/";
 string BEGIN_ASCII=ASCII_DIR+"begin.txt";
-string SELECTHERO_ASCII=ASCII_DIR+"selecthero.txt";
+string SELECTHERO_ASCII=ASCII_DIR+"selectHero.txt";
 string WIN_ASCII=ASCII_DIR+"win_page.txt";
 string LOST_ASCII=ASCII_DIR+"lost_page.txt";
 string DROW_ASCII=ASCII_DIR+"drow.txt";
@@ -35,9 +35,6 @@ bool is_input_enter() {
     return false;
 }*/
 
-void press_any_key_to_continue(){
-    cin.get();
-}
 
 void file_no_exist(string file_location) { cerr<<"Sorry, it seems "<<file_location<<" doesn't exist\n"; }
 
@@ -46,7 +43,7 @@ void print_file(string file_location) {
     string line;
     ifstream infile{file_location};
     if (infile.fail()) { file_no_exist(file_location);exit(1);} // should throw exception here 
-    while (!infile.eof()) { getline(infile,line); cout << line; }
+    while (!infile.eof()) { getline(infile,line); cout << line<<endl; }
     infile.close();
 }
 
@@ -94,8 +91,10 @@ void selectHero(string & hero) {
             hero="goblin";
             print_file(GOBLIN_ASCII);
             if (is_input_yes()) break;
+        } else {
+            cout<<"Invalid input. Please input e.g. \"s\" or \"shade\" and press enter."<<endl;
         }
-        cout<<"Invalid input. Please input e.g. \"s\" or \"shade\" and press enter.";
+        print_file(SELECTHERO_ASCII); 
     }
     cout << "You have selected "<<hero<<"."<<endl;
 }
@@ -114,7 +113,6 @@ void GameSystem::playGame() {
     print_intro();
     cout << "Welcome to the dungeon." <<endl;
     chooseToPrintMap(mp);
-    press_any_key_to_continue();
     selectHero(mp->herotype);
     /*
     int turn=0;

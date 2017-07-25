@@ -15,18 +15,15 @@ protected:
 	int dif_atk;
 	int dif_def;
 	bool hit;
-	bool hostile;
 	const std::string race;
 
 public: 
 	
-	Character(int ATK, int DEF, int HP, int dif_atk, int dif_def, bool hit, bool hostile,
+	Character(int ATK, int DEF, int HP, int dif_atk, int dif_def, bool hit,
 		std::string race, char symbol, std::string type);
 	
 	virtual ~Character() = 0;
 	
-	virtual bool getHostile();
-
 	virtual bool getHit();
 
 	virtual int getAtk();

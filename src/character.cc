@@ -3,23 +3,20 @@
 #include "enemy.h"
 #include "hero.h"
 #include "gold.h"
-#include "utilities.h"
 #include <math.h>
 
 using namespace std;
 
 Character::Character(int ATK, int DEF, int HP, 
-    int dif_atk, int dif_def, bool hit, bool hostile,
+    int dif_atk, int dif_def, bool hit,
     string race, char symbol, string type):
 
-Object(type, symbol), 
+Object( symbol,type),
 
 ATK(ATK), DEF(DEF), HP(HP), dif_atk(dif_atk), 
-dif_def(dif_def), hit(hit), hostile(hostile), race(race) {}
+dif_def(dif_def), hit(hit), race(race) {}
 
-bool Character::getHostile() {
-    return hostile;
-}
+
 bool Character::getHit() {
     return hit;
 }
@@ -163,7 +160,7 @@ bool Character::Damaged(int n){
     int hit_miss = rand() % 2;
 
     if(def_Race == "Merchant"){
-        bool hostile = defender->getHostile();
+        bool hostile = true; //defender->getHostile();
         if (Merchant::hostile) {
             hit = true;
             dead = defender->Damaged(dmg);

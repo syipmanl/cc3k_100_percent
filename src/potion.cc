@@ -4,7 +4,7 @@
 using namespace std;
 
 Potion::Potion(string effect) : Item('P',"Potion"), 
-effect(effect)
+effect{effect}
 {}
 
 string Potion::getEffect(){

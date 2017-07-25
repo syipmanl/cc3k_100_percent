@@ -5,8 +5,8 @@
 using namespace std;
 
 
-Enemy::Enemy(int ATK, int DEF, int HP, char symbol, string race, string type, bool hostile)
-			: Character(ATK, DEF, HP, 0, 0, false, symbol, race, type), hostile(hostile) {}
+Enemy::Enemy(int ATK, int DEF, int HP, char symbol, string race, string type)
+			: Character(ATK, DEF, HP, 0, 0, false, race, symbol, type) {}
 
 // default drop gold
 void Enemy::drop_gold(){
@@ -22,7 +22,7 @@ void Enemy::drop_gold(){
 	position->setObject(pile);
 }
 
-Human::Human() : Enemy(20, 20, 140, 'H', "Human", "Enemy", false){}
+Human::Human() : Enemy(20, 20, 140, 'H', "Human", "Enemy"){}
 
 Human::~Human(){}
 
@@ -42,19 +42,19 @@ void Human::drop_gold(){
 }
 
 
-Dwarf::Dwarf() : Enemy(20, 30, 100, 'W', "Dwarf", "Enemy", false){}
+Dwarf::Dwarf() : Enemy(20, 30, 100, 'W', "Dwarf", "Enemy"){}
 Dwarf::~Dwarf(){}
 
 
-Elf::Elf() : Enemy(30, 10, 140, 'E', "Elf", "Enemy", false){}
+Elf::Elf() : Enemy(30, 10, 140, 'E', "Elf", "Enemy"){}
 Elf::~Elf(){}
 
 
-Orc::Orc() : Enemy(30, 25, 180, 'O', "Orc", "Enemy", false){}
+Orc::Orc() : Enemy(30, 25, 180, 'O', "Orc", "Enemy"){}
 Orc::~Orc(){}
 
 bool Merchant::hostile = false;
-Merchant::Merchant() : Enemy(70, 5, 30, 'M', "Merchant", "Enemy",false){}
+Merchant::Merchant() : Enemy(70, 5, 30, 'M', "Merchant", "Enemy"){}
 Merchant::~Merchant(){}
 
 void Merchant::drop_gold(){
@@ -63,21 +63,21 @@ void Merchant::drop_gold(){
 	position->setObject(pile);
 }
 
-Halfling::Halfling() : Enemy(15, 20, 100, 'L', "Halfling", "Enemy", false){}
+Halfling::Halfling() : Enemy(15, 20, 100, 'L', "Halfling", "Enemy"){}
 Halfling::~Halfling(){}
 
 // constructor with no hoard
-Dragon::Dragon() : Enemy(20, 20, 150, 'D', "Dragon", "Enemy", false), drag_hoard(NULL){}
+Dragon::Dragon() : Enemy(20, 20, 150, 'D', "Dragon", "Enemy"), hoard(NULL){}
 // constructor with hoard
-Dragon::Dragon(DragonHoard* hoard) : Enemy(20, 20, 150, 'D', "Dragon", "Enemy", false), drag_hoard(hoard) {}
+Dragon::Dragon(DragonHoard* hoard) : Enemy(20, 20, 150, 'D', "Dragon", "Enemy"), hoard(hoard) {}
 Dragon::~Dragon(){}
 
 DragonHoard* Dragon::getHoard(){
-	return drag_hoard;
+	return hoard;
 }
 
 void Dragon::setHoard(DragonHoard* newhoard){
-	drag_hoard = newhoard;
+	hoard = newhoard;
 }
 
 Enemy::~Enemy() {}

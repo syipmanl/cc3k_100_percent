@@ -16,14 +16,13 @@ Object* Tile::getObject() {
 Tile* Tile::getNeighbour(int index) {
     return neighbours[index];
 }
+
+Tile::Tile():td{nullptr},theObject{nullptr},inChamber{false}{}
+
 void Tile::set_tile(int new_row, int new_col, char new_symbol) {
     symbol = new_symbol;
     row = new_row;
     col = new_col;
-    //neighbours = nullptr;
-    td = nullptr;
-    theObject = nullptr;
-    inChamber = false;
 }
 
 // attach Tile * o to neightbours
@@ -52,11 +51,8 @@ void Tile::cascade_the_chamber(Chamber * thechamber){
 
 void Tile::setObject(Object *ob) {
    theObject = ob;
-   if (!theObject) {
+   if (theObject) {
         td->change(row,col,theObject->getSymbol()); // td[row][column] = symbol
-   }
-   else if(theObject) {
-        td->change(row, col, symbol);
    }
 }
 

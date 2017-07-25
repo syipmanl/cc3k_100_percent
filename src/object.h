@@ -10,12 +10,12 @@ class Object {
 
 protected:
     // string name; 
-    const std::string type; // "Enemy", "Hero", "Gold", "Potion"
     const char symbol; // @, H, C. 
+    const std::string type; // "Enemy", "Hero", "Gold", "Potion"
     Tile * position;
     
 public:
-    Object(std::string type, char symbol);
+    Object(char symbol,std::string type);
     virtual ~Object() = 0;
     virtual char getSymbol();
     virtual string getType();

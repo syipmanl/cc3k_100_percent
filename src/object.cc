@@ -2,7 +2,7 @@
 
 using namespace std;
 
-Object::Object(string type, char symbol): type(type), symbol(symbol), position(NULL)
+Object::Object(char symbol,string type):  symbol(symbol), type(type),position(NULL)
 {}
  // if (name == "air"||name=="stair"||name=="door"||name=="passway"||name=="wall_vert"||name=="wall_hori") {
 	//  type="floorobject";
