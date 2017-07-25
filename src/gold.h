@@ -8,14 +8,14 @@ class Dragon;
 class Gold : public Item {
 private:	
 	const std::string size;
-	const int value;
+	const int amt;
 public:
-	Gold(char symbol, std::string type, int value, std::string size);
+	Gold(char symbol, std::string type, int amt, std::string size);
 	virtual ~Gold() = 0;
 
-	int getValue();
+	int getAmt();
 	std::string getSize();
-	virtual Dragon* getDragon();
+	virtual Dragon* DragonExist();
 	virtual void deleteDragon();
 };
 

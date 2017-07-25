@@ -62,8 +62,10 @@ void chooseToPrintMap(Map * mp) {
 }
 
 bool GameSystem::isWon() {
+    return true;
 }
 bool GameSystem::isLost() {
+    return true;
 }
     
     
@@ -114,12 +116,12 @@ void GameSystem::playGame() {
     chooseToPrintMap(mp);
     press_any_key_to_continue();
     selectHero(mp->herotype);
-    for (int turn=0;;turn++) {
-     
+    /*
+    int turn=0;
+    while (true) {
         
-        if (isWon()) print_win;
-        if (isLost()) print_lost;
-    }
+        
+    }*/
     
     
     // after I load the map usr can print the whole map, I can tell whether or not a character is loaded (test map).

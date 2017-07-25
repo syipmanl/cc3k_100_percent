@@ -8,6 +8,7 @@
 #include "chamber.h"
 using std::vector;
 
+class Chamber;
 class Object;
 class Tile{
     char symbol;    // 7 cases, '.' '/' '+' '#' '|' '-' ' '
@@ -27,8 +28,8 @@ public:
     void attach_td(TextDisplay *td);
     void change_td(char ch);
     //virtual void notify(Tile whoNotified);
-    void cascade_the_chamber(Chamber *); //add more parameter
-    void setObject(Object *); //
+    void cascade_the_chamber(Chamber *thechamber); //add more parameter
+    void setObject(Object *ob); //
     void clearObject(); 
     // Info getInfo();
 

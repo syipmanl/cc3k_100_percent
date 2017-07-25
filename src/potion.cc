@@ -3,8 +3,7 @@
 
 using namespace std;
 
-Potion::Potion(string effect) : 
-Item('Potion', "P"), 
+Potion::Potion(string effect) : Item('P',"Potion"), 
 effect(effect)
 {}
 

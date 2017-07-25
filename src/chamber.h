@@ -1,6 +1,8 @@
 #ifndef __CHAMBER_H__
 #define __CHAMBER_H__ 
 #include "tile.h"
+
+class Object;
 class Chamber {
 	vector<Tile *> tiles;
 	

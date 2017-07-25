@@ -8,7 +8,7 @@ class Potion : public Item {
 private:
 	std::string effect;
 public:
-	Potion(std::string effect);
+	void Potion(std::string effect);
 	~Potion();
 	std::string getEffect();
 };

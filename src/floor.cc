@@ -23,6 +23,7 @@ Hero *generateHero(const string herotype) {
         return new Goblin;
     } else {
         cerr<<"Error constructing hero type."<<endl;
+        return nullptr;
     }
 }
     
@@ -180,7 +181,7 @@ Floor::Floor(TextDisplay* tp):td{tp},thestair{nullptr},init_hero_pos{nullptr},th
 
 // return the index of chamber which the player is in initially, return -1 if no chamber has player
 int Floor::which_chamber_is_player_in() {
-    for (int i=0;i<chambers.size();i++) {
+    for (unsigned int i=0;i<chambers.size();i++) {
         if (chambers[i]->is_player_in_chamber(init_hero_pos)) return i;
     }
     return -1;

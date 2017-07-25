@@ -11,8 +11,7 @@ void Chamber::set_object_randomly(Object *ob) {
     while (!success) {
         srand(time(NULL));
         Tile * thetile=tiles[rand() % tiles.size() -1];
-        Info info=thetile->getInfo();
-        if (info.type=="air") {
+        if (thetile->getObject()->getSymbol()=='.') {
             thetile->clearObject();
             thetile->setObject(ob);
             success=true;

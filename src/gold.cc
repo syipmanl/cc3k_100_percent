@@ -5,12 +5,12 @@
 
 using namespace std;
 
-Gold::Gold(char symbol, string type, int value, string size) : Item(symbol, type), size(size), value(value){}
+Gold::Gold(char symbol, string type, int amt, string size) : Item(symbol, type), size(size), amt(amt){}
 
 Gold::~Gold(){}
 
-int Gold::getValue(){
-	return value;
+int Gold::getAmt(){
+	return amt;
 }
 
 string Gold::getSize(){
@@ -44,7 +44,7 @@ DragonHoard::~DragonHoard(){
 	}
 	delete dragon;
 }
-Dragon* DragonHoard::DragonExist(){
+Dragon* DragonHoard::getDragon(){
 	return dragon;
 }
 void DragonHoard::deleteDragon(){
