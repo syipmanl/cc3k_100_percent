@@ -12,12 +12,10 @@ Hero::Hero(int maxHP, int ATK, int DEF,int gold,
 		int real_hp, int real_atk, int real_def, 
 		char symbol, std::string type, std::string race):
 
-		Character(ATK, DEF, 
-			symbol, type, race), 
-
+		Character(ATK, DEF,HP, symbol, type, race), 
 		maxHP(maxHP), ATK(ATK), DEF(DEF), 
-		dif_hp(dif_hp), dif_atk(dif_atk), dif_def(dif_def)
-		real_hp(real_hp), real_hp(real_atk), real_def(real_def)
+		dif_hp(dif_hp), dif_atk(dif_atk), dif_def(dif_def),
+		real_hp(real_hp), real_hp(real_atk), real_def(real_def),
 		gold(gold)
 			{}
 

@@ -8,8 +8,8 @@
 using std::vector;
 
 class Object;
-// A Tile is a Cell+Subject+Observer-Object
 class Tile{
+    char c;    // 7 cases, '.' '/' '+' '#' '|' '-' ' '
 	int row, col;
 	vector<Tile *> neightbours;
 	TextDisplay *td;
@@ -17,7 +17,7 @@ class Tile{
 
 public:
     bool inChamber;
-    Tile(const int r, const int c);
+    Tile(const int r, const int c, const ch);
     void attach(Tile* o);
     void attachTd(TextDisplay *td);
     void notifyTd();

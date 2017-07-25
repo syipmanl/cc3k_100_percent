@@ -2,7 +2,7 @@
 
 
 
-Tile::Tile(const int r, const int c):row{r},col{c},td{nullptr},ob{nullptr},inChamber{false}{
+Tile::Tile(const int r, const int c, const char ch):c{ch}, row{r},col{c},td{nullptr},ob{nullptr},inChamber{false}{
 }
 
 
