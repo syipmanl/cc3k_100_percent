@@ -211,7 +211,25 @@ void Floor::init(const string herotype) {
         // generate enemies
     for (int i=1;i<=20;i++) {
         srand(time(NULL));
-        int type_enemy// To-DO
+        int type_enemy=rand() % 18+1;
+        char ch_enemy;
+        if (type_enemy>=1 && type_enemy<=4) {
+            ch_enemy='H';
+        } else if (type_enemy>=5 && type_enemy<=7) {
+            ch_enemy='W';
+        } else if (type_enemy>=8 && type_enemy<=9) {
+            ch_enemy='E';
+        } else if (type_enemy>=9 && type_enemy<=11) {
+            ch_enemy='O';
+        } else if (type_enemy>=12 && type_enemy<=13) {
+            ch_enemy='M';
+        } else {
+            ch_enemy='L';
+        }
+        Enemy *enemy=translate(ch_enemy);
+        srand(time(NULL));
+        int num_cham=rand() % chambers.size();
+        chambers[num_cham]->set_object_randomly(enemy);
     }
 }
 

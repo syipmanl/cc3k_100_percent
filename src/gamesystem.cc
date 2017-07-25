@@ -13,7 +13,8 @@ string DROW_ASCII=ASCII_DIR+"drow.txt";
 string TROLL_ASCII=ASCII_DIR+"troll.txt";
 string GOBLIN_ASCII=ASCII_DIR+"goblin.txt";
 string SHADE_ASCII=ASCII_DIR+"shade.txt";
-string VAMPIRE_ASCII=ASCII_DIR+"vampire.txt"; void file_no_exist(string);
+string VAMPIRE_ASCII=ASCII_DIR+"vampire.txt";
+void file_no_exist(string);
 void print_file(string);
 void print_intro() { print_file(BEGIN_ASCII);  }
 void print_win() { print_file(WIN_ASCII); }
@@ -119,8 +120,6 @@ void GameSystem::playGame() {
         if (isWon()) print_win;
         if (isLost()) print_lost;
     }
-    
-    
     
     
     // after I load the map usr can print the whole map, I can tell whether or not a character is loaded (test map).
