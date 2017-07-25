@@ -5,7 +5,7 @@
 
 using namespace std;
 
-string DEFAUL_MAP="maps/layout_empty.txt";
+string DEFAUL_MAP="../maps/layout_empty.txt";
 
 
 // help information

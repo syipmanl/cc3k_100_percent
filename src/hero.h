@@ -12,8 +12,14 @@ protected:
 	// const int DEF;
 	// int dif_atk;
 	// int dif_def;
+<<<<<<< HEAD
 	// int real_atk; 
 	// int real_def; 
+=======
+     int real_hp;
+	 int real_atk; 
+	 int real_def; 
+>>>>>>> 8822aae6eb73b02e660eb9b51763cc62be58b903
 	int gold;
 
 public: 
@@ -29,7 +35,16 @@ public:
 	// pure virtual to make abstract
 	virtual ~Hero() = 0;
 	
+<<<<<<< HEAD
+=======
+    void HeroMove(string direction);
+    
+>>>>>>> 8822aae6eb73b02e660eb9b51763cc62be58b903
 	virtual int getmaxHP();
+    
+    virtual int getATK();
+    
+    virtual int getDEF();
 
 	virtual int getGold();
 
@@ -54,7 +69,7 @@ class Vampire : public Hero{
 	public:
 		Vampire();
 		~Vampire();
-		void regen(int hp) override;
+		void regen(int hp) ;
 };
 
 class Troll : public Hero{

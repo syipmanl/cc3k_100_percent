@@ -3,7 +3,10 @@
 #include "enemy.h"
 #include "hero.h"
 #include "gold.h"
+<<<<<<< HEAD
 #include "utilities.h"
+=======
+>>>>>>> 8822aae6eb73b02e660eb9b51763cc62be58b903
 #include <math.h>
 
 using namespace std;
@@ -12,10 +15,15 @@ Character::Character(int ATK, int DEF, int HP,
     int dif_atk, int dif_def, bool hit, bool hostile,
     string race, char symbol, string type):
 
-Object(type, symbol), 
+Object( symbol,type),
 
 ATK(ATK), DEF(DEF), HP(HP), dif_atk(dif_atk), 
+<<<<<<< HEAD
 dif_def(dif_def), hit(hit), hostile(hostile), race(race) {}
+=======
+dif_def(dif_def), hit(hit), race(race) {}
+
+>>>>>>> 8822aae6eb73b02e660eb9b51763cc62be58b903
 
 bool Character::getHostile() {
     return hostile;
@@ -163,7 +171,11 @@ bool Character::Damaged(int n){
     int hit_miss = rand() % 2;
 
     if(def_Race == "Merchant"){
+<<<<<<< HEAD
         bool hostile = defender->getHostile();
+=======
+        bool hostile = true; //defender->getHostile();
+>>>>>>> 8822aae6eb73b02e660eb9b51763cc62be58b903
         if (Merchant::hostile) {
             hit = true;
             dead = defender->Damaged(dmg);

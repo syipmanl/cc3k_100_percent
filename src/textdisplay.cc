@@ -22,7 +22,7 @@ void TextDisplay::change(int row, int col, char symbol) {
 }
 
 ostream &operator<<(ostream &out, const TextDisplay &td) {
-    for (int i=0;i<td.tdDisplay.size();i++) {
+    for (unsigned int i=0;i<td.tdDisplay.size();i++) {
         out<<td.tdDisplay.at(i)<<std::endl;
     }
     return out;

@@ -44,7 +44,7 @@ DragonHoard::~DragonHoard(){
 	}
 	delete dragon;
 }
-Dragon* DragonHoard::DragonExist(){
+Dragon* DragonHoard::getDragon(){
 	return dragon;
 }
 void DragonHoard::deleteDragon(){

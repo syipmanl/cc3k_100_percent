@@ -4,15 +4,16 @@
 #include "character.h"
 #include <string>
 
+
 class DragonHoard;
 
 class Enemy: public Character {
 private:
 
 public: 
-	Enemy(int Atk, int Def, int HP, std::string race, char symbol, std::string type);
+	Enemy(int Atk, int Def, int HP, char symbol, std::string race, std::string type);
 	virtual ~Enemy() = 0;
-	virtual void dropGold();
+	virtual void drop_gold();
 };
 
 
@@ -20,7 +21,7 @@ class Human : public Enemy{
 	public:
 		Human();
 		~Human();
-		void dropGold();
+		void drop_gold();
 };
 
 class Dwarf : public Enemy{
@@ -47,7 +48,7 @@ class Merchant : public Enemy{
 		static bool hostile;
 		Merchant();
 		~Merchant();
-		void dropGold();
+		void drop_gold();
 };
 
 class Halfling : public Enemy{

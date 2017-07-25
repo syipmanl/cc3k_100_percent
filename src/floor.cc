@@ -23,6 +23,7 @@ Hero *generateHero(const string herotype) {
         return new Goblin;
     } else {
         cerr<<"Error constructing hero type."<<endl;
+        return nullptr;
     }
 }
     
@@ -120,11 +121,12 @@ Floor::Floor(TextDisplay* tp):td{tp},thestair{nullptr},init_hero_pos{nullptr},th
     int width=(*display).at(0).size();
     thefloor.resize(height);
     for (int i=0;i<height;i++) {
-        thefloor.resize(width);
+        thefloor.at(i).resize(width);
     }
     for (int i=0;i<height;i++) {
        for (int j=0;j<width;j++) {
            Tile *thetile=&thefloor[i][j]; 
+           thetile->attach_td(td);       
            char ch=(*display).at(i).at(j);
            thetile->set_tile(i,j,ch);
            if (ch=='@') {
@@ -159,7 +161,6 @@ Floor::Floor(TextDisplay* tp):td{tp},thestair{nullptr},init_hero_pos{nullptr},th
            thetile->attach(northeast); // 5
            thetile->attach(southwest); // 6
            thetile->attach(southeast); // 7
-           thetile->attach_td(td);       
        }
     }
     
@@ -180,7 +181,7 @@ Floor::Floor(TextDisplay* tp):td{tp},thestair{nullptr},init_hero_pos{nullptr},th
 
 // return the index of chamber which the player is in initially, return -1 if no chamber has player
 int Floor::which_chamber_is_player_in() {
-    for (int i=0;i<chambers.size();i++) {
+    for (unsigned int i=0;i<chambers.size();i++) {
         if (chambers[i]->is_player_in_chamber(init_hero_pos)) return i;
     }
     return -1;
