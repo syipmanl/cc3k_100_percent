@@ -12,20 +12,20 @@ protected:
 	int ATK;
 	int DEF;
 	int HP;
+	int dif_atk;
+	int dif_def
+	bool hit;
 	const std::string race;
 
 public: 
 	
-	Character(int Atk, int Def, int HP, std::string race, char symbol, std::string type);
+	Character(int ATK, int DEF, int HP, int dif_atk, int dif_def, bool hit
+		std::string race, char symbol, std::string type);
 	
 	virtual ~Character() = 0;
 	
-	virtual void setAtk(int n);
-	
-	virtual void setDef(int n);
+	virtual void getHit();
 
-	virtual void setHP(int n);
-	
 	virtual int getAtk();
 	
 	virtual int getDef();
@@ -34,13 +34,17 @@ public:
 	
 	virtual std::string getRace();
 
-	virtual std::string move(int d);
+	virtual std::string getType();
 
-	virtual void takeDamage(int n);
+	virtual Character::usePotion(string effect);
+
+	virtual bool Damaged(int n);
 	
-	virtual std::string Damage(Character* defender);
+	virtual bool Attack(Character* defender);
 
-	virtual void heal(int n);
+	virtual bool move(int index);
+
+	virtual void regen(int n) = 0;
 };
 
-#endif //_CHARACTER_H
+#endif 
