@@ -22,12 +22,7 @@ void Enemy::drop_gold(){
 	position->setObject(pile);
 }
 
-<<<<<<< HEAD
-Human::Human() : Enemy(20, 20, 140, 'H', "Human", "Enemy", false, true){}
-=======
 Human::Human() : Enemy(20, 20, 140, 'H', "Human", "Enemy"){}
->>>>>>> 8822aae6eb73b02e660eb9b51763cc62be58b903
-
 Human::~Human(){}
 
 void Human::drop_gold(){
@@ -46,21 +41,20 @@ void Human::drop_gold(){
 }
 
 
-<<<<<<< HEAD
-Dwarf::Dwarf() : Enemy(20, 30, 100, 'W', "Dwarf", 'Enemy', false, true){}
+
+Dwarf::Dwarf() : Enemy(20, 30, 100, 'W', "Dwarf", "Enemy"){}
 Dwarf::~Dwarf(){}
 
 
-Elf::Elf() : Enemy(30, 10, 140, 'E', "Elf", "Enemy", false, true){}
+Elf::Elf() : Enemy(30, 10, 140, 'E', "Elf", "Enemy"){}
 Elf::~Elf(){}
 
 
-Orc::Orc() : Enemy(30, 25, 180, 'O', "Orc" "Enemy", false, true){}
+Orc::Orc() : Enemy(30, 25, 180, 'O', "Orc" "Enemy"){}
 Orc::~Orc(){}
 
 bool Merchant::hostile = false;
-Merchant::Merchant() : Enemy(70, 5, 30, 'M', "Merchant", "Enemy",false, false){}
-=======
+Merchant::Merchant() : Enemy(70, 5, 30, 'M', "Merchant", "Enemy"){}
 Dwarf::Dwarf() : Enemy(20, 30, 100, 'W', "Dwarf", "Enemy"){}
 Dwarf::~Dwarf(){}
 
@@ -85,31 +79,31 @@ void Merchant::drop_gold(){
 }
 
 <<<<<<< HEAD
-Halfling::Halfling() : Enemy(15, 20, 100, 'L', "Halfling", "Enemy", false, true){}
+Halfling::Halfling() : Enemy(15, 20, 100, 'L', "Halfling", "Enemy"){}
 Halfling::~Halfling(){}
 
 // constructor with no hoard
-Dragon::Dragon() : Enemy(20, 20, 150, 'D', "Dragon", "Enemy", false, true), drag_hoard(NULL){}
+Dragon::Dragon() : Enemy(20, 20, 150, 'D', "Dragon", "Enemy"), drag_hoard(NULL){}
 // constructor with hoard
-Dragon::Dragon(DragonHoard* hoard) : Enemy(20, 20, 150, 'D', "Dragon", "Enemy", false, true), drag_hoard(hoard) {}
+Dragon::Dragon(DragonHoard* hoard) : Enemy(20, 20, 150, 'D', "Dragon", "Enemy"), drag_hoard(hoard) {}
 =======
 Halfling::Halfling() : Enemy(15, 20, 100, 'L', "Halfling", "Enemy"){}
 Halfling::~Halfling(){}
 
 // constructor with no hoard
 Dragon::Dragon() : Enemy(20, 20, 150, 'D', "Dragon", "Enemy"), hoard(NULL){}
-// constructor with hoard
-Dragon::Dragon(DragonHoard* hoard) : Enemy(20, 20, 150, 'D', "Dragon", "Enemy"), hoard(hoard) {}
->>>>>>> 8822aae6eb73b02e660eb9b51763cc62be58b903
-Dragon::~Dragon(){}
-
-DragonHoard* Dragon::getHoard(){
-	return hoard;
-}
-
-void Dragon::setHoard(DragonHoard* newhoard){
-	hoard = newhoard;
-}
-
-Enemy::~Enemy() {}
+//// constructor with hoard
+//Dragon::Dragon(DragonHoard* hoard) : Enemy(20, 20, 150, 'D', "Dragon", "Enemy"), hoard(hoard) {}
+//>>>>>>> 8822aae6eb73b02e660eb9b51763cc62be58b903
+//Dragon::~Dragon(){}
+//
+//DragonHoard* Dragon::getHoard(){
+//	return hoard;
+//}
+//
+//void Dragon::setHoard(DragonHoard* newhoard){
+//	hoard = newhoard;
+//}
+//
+//Enemy::~Enemy() {}
 

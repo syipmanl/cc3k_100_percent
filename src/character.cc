@@ -3,10 +3,6 @@
 #include "enemy.h"
 #include "hero.h"
 #include "gold.h"
-<<<<<<< HEAD
-#include "utilities.h"
-=======
->>>>>>> 8822aae6eb73b02e660eb9b51763cc62be58b903
 #include <math.h>
 
 using namespace std;
@@ -17,13 +13,8 @@ Character::Character(int ATK, int DEF, int HP,
 
 Object( symbol,type),
 
-ATK(ATK), DEF(DEF), HP(HP), dif_atk(dif_atk), 
-<<<<<<< HEAD
-dif_def(dif_def), hit(hit), hostile(hostile), race(race) {}
-=======
+ATK(ATK), DEF(DEF), HP(HP), dif_atk(dif_atk),
 dif_def(dif_def), hit(hit), race(race) {}
-
->>>>>>> 8822aae6eb73b02e660eb9b51763cc62be58b903
 
 bool Character::getHostile() {
     return hostile;
@@ -57,7 +48,7 @@ string Character::getType() {
 // remind to set zero when new floor
 void Character::usePotion(string effect, int maxHP) {
     if(effect == "RH") {
-        HP = min(HP + 10, maxHP);
+//        HP = min(HP + 10, maxHP);
     }
     else if(effect == "BA") {
         dif_atk += 5;
@@ -66,7 +57,7 @@ void Character::usePotion(string effect, int maxHP) {
         dif_def += 5;
     }
     else if(effect == "PH") {
-        HP = max(HP + 10, 0);
+//        HP = max(HP + 10, 0);
     }
     else if(effect == "WA") {
         dif_atk -= 5;
@@ -171,11 +162,7 @@ bool Character::Damaged(int n){
     int hit_miss = rand() % 2;
 
     if(def_Race == "Merchant"){
-<<<<<<< HEAD
-        bool hostile = defender->getHostile();
-=======
         bool hostile = true; //defender->getHostile();
->>>>>>> 8822aae6eb73b02e660eb9b51763cc62be58b903
         if (Merchant::hostile) {
             hit = true;
             dead = defender->Damaged(dmg);
@@ -240,46 +227,6 @@ bool Character::Damaged(int n){
     return dead;
 }
 
-    // if(def_Race != "Drow" && atk_Race == "Elf") {
-
-    //     for (int i = 0; i < 2; i++) {
-    //         if(hit_miss == 0) {
-    //             dead = defender->Damaged(dmg);
-    //             // geneate hit attack message
-    //         }
-    //         else{
-    //             // generate miss damage message
-    //         }
-    //         //generate miss or hit message
-    //     }
-    // }
-
-    // if(defType == "player" &&) {
-
-    // }
-
-    // // calculate dmg
-
-    // // effect when Orc attack Goblin will magnified dmg by 1.5
-
-
-
-    // // reduce defender HP
-    // defender->Damaged(dmg);
-
-
-    // // get HP after taking dmg;
-    // hp = defender->getHP();
-
-
-    // generate attack message
-   
-    // if(hp == 0){
-    // }
-
-    // effect for Vampire. Heal 5HP upon attacking or lost 5HP upon attacking dwarf
-
-    // Merchant become hostile after being attacked
     
 Character::~Character() {}
 

@@ -28,13 +28,9 @@ public:
     void attach_td(TextDisplay *td);
     void change_td(char ch);
     //virtual void notify(Tile whoNotified);
-<<<<<<< HEAD
     // void cascade_the_chamber(Chamber *); //add more parameter
-    void setObject(Object *); //
-=======
     void cascade_the_chamber(Chamber *thechamber); //add more parameter
     void setObject(Object *ob); //
->>>>>>> 8822aae6eb73b02e660eb9b51763cc62be58b903
     void clearObject(); 
     // Info getInfo();
 

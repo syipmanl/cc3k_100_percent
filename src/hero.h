@@ -12,14 +12,11 @@ protected:
 	// const int DEF;
 	// int dif_atk;
 	// int dif_def;
-<<<<<<< HEAD
 	// int real_atk; 
-	// int real_def; 
-=======
+	// int real_def;
      int real_hp;
 	 int real_atk; 
-	 int real_def; 
->>>>>>> 8822aae6eb73b02e660eb9b51763cc62be58b903
+	 int real_def;
 	int gold;
 
 public: 
@@ -35,11 +32,6 @@ public:
 	// pure virtual to make abstract
 	virtual ~Hero() = 0;
 	
-<<<<<<< HEAD
-=======
-
-    
->>>>>>> 8822aae6eb73b02e660eb9b51763cc62be58b903
 	virtual int getmaxHP();
     
     virtual int getATK();
