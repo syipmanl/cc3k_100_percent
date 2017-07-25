@@ -37,7 +37,7 @@ bool is_valid_neighbour(const char c) {
 }
 
 bool is_floor_object(const char c) {
-    if (c==' '||c=='.'||c=='+'||c=='/'||c=='#'||c=='-'||c=='|') {
+    if (c==' '||c=='.'||c=='+'||c=='\\'||c=='#'||c=='-'||c=='|') {
         return true;
     } else {
         return false;
@@ -52,14 +52,14 @@ bool is_enemy_object(const char c) {
     }
 }
 
-bool is_gold_object(const char c) {
+bool is_potion_object(const char c) {
     if (c=='0'||c=='1'||c=='2'||c=='3'||c=='4'||c=='5') {
         return true;
     } else {
         return false;
     }
 }
-bool is_potion_object(const char c) {
+bool is_gold_object(const char c) {
     if (c=='6'||c=='7'||c=='8'||c=='9') {
         return true;
     } else {
@@ -141,7 +141,7 @@ Floor::Floor(TextDisplay* tp):td{tp},thestair{nullptr},init_hero_pos{nullptr},th
                 thetile->change_td('G');
             } else if (is_potion_object(ch)) {
                 thetile->change_td('P');
-            }
+           }
            }
            Tile *north=(i-1>=0 && is_valid_neighbour((*display).at(i-1).at(j)))? &thefloor[i-1][j]:nullptr;  // if outofrange or Wall then nullptr
            Tile *south=(i+1<height && is_valid_neighbour((*display).at(i+1).at(j)))? &thefloor[i+1][j]:nullptr;
@@ -191,45 +191,42 @@ char convert_num_into_char(int num) {
     return '0'+num;
 }
 
-void Floor::init(const string){}
 
-/*
+void Floor::random_generate_object_on_floor(Object *ob) {
+    srand(time(NULL));
+    Chamber *random_chamber=chambers[rand()%chambers.size()];
+    random_chamber->set_object_randomly(ob);
+}
+
 void Floor::init(const string herotype) {
+    
         // generate character
     Hero *hero=generateHero(herotype);
-    if (!theplayer) { // find a '.' randomly and place it in random chamber
-        srand(time(NULL));
-        Chamber * random_chamber=chambers[rand() % chambers.size()];
-        random_chamber->set_object_randomly(hero);
+    if (!init_hero_pos) { // find a '.' randomly and place it in random chamber
+        random_generate_object_on_floor(hero);
     } else { // delete Hero * and replace with the right one
-        Info cell=theplayer->getInfo();
-        Tile * thetile=thefloor[cell.row][cell.col];
-        thetile->clearObject();
-        thetile->setObject(hero);
+        init_hero_pos->setObject(hero);
     } 
+    
         // generate stair
     if (!thestair) {
-        Object *stair=new Object("stair");
         int num1=which_chamber_is_player_in();
         int num2=num1;
         while (num1==num2) {
         srand(time(NULL));
             num2=rand() % chambers.size();
-            
         }
-        chambers[num2]->set_object_randomly(stair);
+        chambers[num2]->set_stair_randomly();
     }
+    
         // generate potion
     for (int i=1;i<=20;i++) {
         // random potion
         srand(time(NULL));
         int type_potion=rand() % 6;
         int ch=convert_num_into_char(type_potion);
-        Potion *potion=translate(ch);
-        // random chamber
-        srand(time(NULL));
-        int num_cham=rand() % chambers.size();
-        chambers[num_cham]->set_object_randomly(potion);
+        Object *potion=translate(ch);
+        random_generate_object_on_floor(potion);
     }
     
         
@@ -245,11 +242,20 @@ void Floor::init(const string herotype) {
         } else {
             ch_gold='9';
         }
-        Gold *gold=translate(ch_gold);
-        srand(time(NULL));
-        int num_cham=rand() % chambers.size();
-        chambers[num_cham]->set_object_randomly(gold);
-    }
+        Object *gold=translate(ch_gold);
+        random_generate_object_on_floor(gold);
+        if (ch_gold=='9') { // DragonHoard 
+            Dragon *dragon=new Dragon;
+            for (int i=0;i<=8;i++) { // go through 8 neighbours
+                Tile *thetile=gold->getPosition();
+                if (thetile->getSymbol()!=',') continue;
+                thetile->setObject(dragon);
+                dragon->setPosition(thetile);
+                enemies.push_back(dragon);
+                break;
+            }
+        }
+   }
     
             
         // generate enemies
@@ -270,12 +276,10 @@ void Floor::init(const string herotype) {
         } else {
             ch_enemy='L';
         }
-        Enemy *enemy=translate(ch_enemy);
-        srand(time(NULL));
-        int num_cham=rand() % chambers.size();
-        chambers[num_cham]->set_object_randomly(enemy);
+        Object *enemy=translate(ch_enemy);
+        random_generate_object_on_floor(enemy);
     }
-}*/
+}
 
 ostream &operator<<(ostream &out, const Floor &fl) {
     out<<*fl.td;

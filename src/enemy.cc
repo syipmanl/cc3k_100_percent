@@ -50,27 +50,15 @@ Elf::Elf() : Enemy(30, 10, 140, 'E', "Elf", "Enemy"){}
 Elf::~Elf(){}
 
 
-Orc::Orc() : Enemy(30, 25, 180, 'O', "Orc" "Enemy"){}
-Orc::~Orc(){}
-
-bool Merchant::hostile = false;
-Merchant::Merchant() : Enemy(70, 5, 30, 'M', "Merchant", "Enemy"){}
-Dwarf::Dwarf() : Enemy(20, 30, 100, 'W', "Dwarf", "Enemy"){}
-Dwarf::~Dwarf(){}
-
-
-Elf::Elf() : Enemy(30, 10, 140, 'E', "Elf", "Enemy"){}
-Elf::~Elf(){}
-
-
 Orc::Orc() : Enemy(30, 25, 180, 'O', "Orc", "Enemy"){}
 Orc::~Orc(){}
 
+
+
+
 bool Merchant::hostile = false;
 Merchant::Merchant() : Enemy(70, 5, 30, 'M', "Merchant", "Enemy"){}
->>>>>>> 8822aae6eb73b02e660eb9b51763cc62be58b903
 Merchant::~Merchant(){}
-Merchant::getHostile
 
 void Merchant::drop_gold(){
 	MerchantHoard* pile = new MerchantHoard();
@@ -78,32 +66,25 @@ void Merchant::drop_gold(){
 	position->setObject(pile);
 }
 
-<<<<<<< HEAD
-Halfling::Halfling() : Enemy(15, 20, 100, 'L', "Halfling", "Enemy"){}
-Halfling::~Halfling(){}
 
-// constructor with no hoard
-Dragon::Dragon() : Enemy(20, 20, 150, 'D', "Dragon", "Enemy"), drag_hoard(NULL){}
-// constructor with hoard
-Dragon::Dragon(DragonHoard* hoard) : Enemy(20, 20, 150, 'D', "Dragon", "Enemy"), drag_hoard(hoard) {}
-=======
 Halfling::Halfling() : Enemy(15, 20, 100, 'L', "Halfling", "Enemy"){}
 Halfling::~Halfling(){}
 
 // constructor with no hoard
 Dragon::Dragon() : Enemy(20, 20, 150, 'D', "Dragon", "Enemy"), hoard(NULL){}
-//// constructor with hoard
-//Dragon::Dragon(DragonHoard* hoard) : Enemy(20, 20, 150, 'D', "Dragon", "Enemy"), hoard(hoard) {}
-//>>>>>>> 8822aae6eb73b02e660eb9b51763cc62be58b903
-//Dragon::~Dragon(){}
+// constructor with hoard
+Dragon::Dragon(DragonHoard* hoard) : Enemy(20, 20, 150, 'D', "Dragon", "Enemy"), hoard(hoard) {}
+
+
+Dragon::~Dragon(){}
 //
-//DragonHoard* Dragon::getHoard(){
-//	return hoard;
-//}
+DragonHoard* Dragon::getHoard(){
+ return hoard;
+}
 //
-//void Dragon::setHoard(DragonHoard* newhoard){
-//	hoard = newhoard;
-//}
+void Dragon::setHoard(DragonHoard* newhoard){
+	hoard = newhoard;
+}
 //
-//Enemy::~Enemy() {}
+Enemy::~Enemy() {}
 

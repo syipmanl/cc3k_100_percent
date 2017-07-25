@@ -5,7 +5,7 @@
 #include <vector>
 #include "textdisplay.h"
 #include "object.h"
-// #include "chamber.h"
+#include "chamber.h"
 using std::vector;
 
 class Chamber;
@@ -20,6 +20,7 @@ class Tile{
 public:
     Tile();
     bool inChamber; //
+    void set_stair();
     char getSymbol();
     Object* getObject();
     Tile * getNeighbour(int index);
@@ -28,7 +29,6 @@ public:
     void attach_td(TextDisplay *td);
     void change_td(char ch);
     //virtual void notify(Tile whoNotified);
-    // void cascade_the_chamber(Chamber *); //add more parameter
     void cascade_the_chamber(Chamber *thechamber); //add more parameter
     void setObject(Object *ob); //
     void clearObject(); 

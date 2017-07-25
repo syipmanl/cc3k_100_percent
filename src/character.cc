@@ -8,7 +8,7 @@
 using namespace std;
 
 Character::Character(int ATK, int DEF, int HP, 
-    int dif_atk, int dif_def, bool hit, bool hostile,
+    int dif_atk, int dif_def, bool hit,
     string race, char symbol, string type):
 
 Object( symbol,type),
@@ -71,7 +71,7 @@ void Character::usePotion(string effect, int maxHP) {
 
 // coverts direction into array index
 void Character::CharacterMove(string direction){
-    int index;
+    int index = 0;
     if     (direction == "no") index = 0;
     else if(direction == "ea") index = 1;
     else if(direction == "so") index = 2;

@@ -19,6 +19,7 @@ class Map {
 
 public:
 	Map(ifstream & map_file); 
+    void play_floor(int floor_num);
     int get_num_Of_floor();
     bool isEmpty();
     string herotype;

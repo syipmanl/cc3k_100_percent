@@ -26,6 +26,7 @@ public:
     Floor(TextDisplay* tp);
     void init(const string herotype);
 	Chamber * random_available_chamber();
+    void random_generate_object_on_floor(Object *ob);
 
     friend ostream &operator<<(ostream &out, const Floor &fl);
 };

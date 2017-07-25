@@ -114,11 +114,19 @@ void GameSystem::playGame() {
     cout << "Welcome to the dungeon." <<endl;
     chooseToPrintMap(mp);
     selectHero(mp->herotype);
-    /*
     int turn=0;
+    int num_floor=0;
+    
+    for (int i=1;i<=5;i++) {
+        mp->play_floor(i);
+    }
+    
+    /*
     while (true) {
         
         
+        
+        turn++;
     }*/
     
     

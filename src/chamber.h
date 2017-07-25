@@ -11,6 +11,7 @@ public:
     bool is_player_in_chamber(Tile *);
     int size();
     void set_object_randomly(Object *ob);
+    void set_stair_randomly();
     void addTile(Tile *t);
 };
 

@@ -1,11 +1,9 @@
 #include "map.h"
 #include <cassert>
 #include "textdisplay.h"
+#include <iostream>
 
-
-using std::string;
-using std::ifstream;
-
+using namespace std;
 bool isboundary(const string);
 
 // check if the line is like
@@ -51,6 +49,7 @@ bool Map::isEmpty() {
     return (isEmptyMap)? true:false;
 }
 
+
 // load a Map or translate saved game into map 
 Map::Map(ifstream & map_file) {
     isEmptyMap=true;
@@ -83,6 +82,15 @@ Map::Map(ifstream & map_file) {
         }
         flag=false;
 	}
+}
+
+void Map::play_floor(int floor_num) {
+    
+    Floor * theFloor=floors[floor_num-1];
+    theFloor->init(herotype);
+    cout << *theFloor;
+    // To-DO
+    
 }
 
 // print out each floor
