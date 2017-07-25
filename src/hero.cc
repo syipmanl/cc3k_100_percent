@@ -56,13 +56,13 @@ Hero::~Hero() {}
  *	heal Hero n amount of HP
  *	HP can't exceed maxHP
  */
-void Hero::heal(int n) {
-	dif_hp += n;
-	real_hp += dif_hp 
-	if (real_hp > maxHP)
-		real_hp = maxHP;
-    return;
-}
+// void Hero::heal(int n) {
+// 	dif_hp += n;
+// 	real_hp += dif_hp 
+// 	if (real_hp > maxHP)
+// 		real_hp = maxHP;
+//     return;
+// }
 
 // move method for Hero. 
 // convert d to int and call Character::move(int d)

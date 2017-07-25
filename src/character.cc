@@ -193,7 +193,7 @@ bool Character::Damaged(int n){
     // vampire attacks anyone else: get 5 hp
     if(atkRace == "Vampire"){
         if(defRace != "Dwarf"){
-            regen(5); // alex has to check if vampire hp = 0
+            HP += 5; // alex has to check if vampire hp = 0
         }
         else{
             Damaged(5); 

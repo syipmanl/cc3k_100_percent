@@ -46,7 +46,7 @@ public:
 
 	virtual bool move(int index);
 
-	virtual void regen(int n) = 0;
+	// virtual void regen(int n) = 0;
 };
 
 #endif 
