@@ -3,7 +3,7 @@
 #include "floor.h"
 #include "tile.h"
 #include "object.h"
-//#include "potion.h"
+#include "potion.h"
 #include "gold.h"
 #include <iostream>
 
@@ -26,22 +26,24 @@ Hero *generateHero(const string herotype) {
 }
     
 
-bool isWall_Or_Nothing(const char c) {
-    return c=='|'||c=='-'||c==' ';
+bool is_valid_neighbour(const char c) {
+    if (c==' '||c=='-'||c=='|'||c=='+'||c=='#') {
+        return false;
+    } else {
+        return true;
+    }
+}
+
+bool is_floor_object(const char c) {
+    if (c==' '||c=='.'||c=='+'||c=='/'||c=='#'||c=='-'||c=='|') {
+        return true;
+    } else {
+        return false;
+    }
 }
 
 Object *translate(char ch) {
-    if (ch=='.') {
-        return new Object("air");
-    } else if (ch=='|') {
-        return new Object("wall_vert");
-    } else if (ch=='-') {
-        return new Object("wall_hori");
-    } else if (ch=='#') {
-        return new Object("passway");
-    } else if (ch=='+') {
-        return new Object("door");
-    } else if (ch=='@') {
+     if (ch=='@') {
         return new Hero;
     } else if (ch=='H') {
         return new Human("human")
@@ -84,27 +86,39 @@ Object *translate(char ch) {
 
 bool Floor::hasHero() {return (theplayer)?true:false;}
 
+
+// Each Tile * will point to a valid Tile (no nullptr)
+// neighbours of a Tile will be nullptr if it is ' ' or '|' or '-' or '+' or '#' shown on textdisplay (the map initially load in)
 Floor::Floor(TextDisplay* tp):td{tp},theplayer{nullptr},thestair{nullptr}{
     
     // initalize thefloor using td
     vector<string> *display=td->getDisplay();
     int height=display->size();
     int width=(*display).at(0).size();
+    thefloor.resize(height);
+    for (int i=0;i<height;i++) {
+        thefloor.resize(width);
+    }
     for (int i=0;i<height;i++) {
        for (int j=0;j<width;j++) {
-           Tile *thetile=thefloor[i][j]; 
-           Tile *north=(i-1>=0 && !isWall_Or_Nothing((*display).at(i-1).at(j)))? thefloor[i-1][j]:nullptr;  // if outofrange or Wall then nullptr
-           Tile *south=(i+1<height && !isWall_Or_Nothing((*display).at(i+1).at(j)))? thefloor[i+1][j]:nullptr;
-           Tile *east=(j+1<width && !isWall_Or_Nothing((*display).at(i).at(j+1)))? thefloor[i][j+1]:nullptr;
-           Tile *west=(j-1>=0 && !isWall_Or_Nothing((*display).at(i).at(j-1)))? thefloor[i][j-1]:nullptr;
-           Tile *northeast=(i-1>=0 && j+1<width && !isWall_Or_Nothing((*display).at(i-1).at(j+1)))? thefloor[i-1][j+1]:nullptr;
-           Tile *northwest=(i-1>=0 && j-1>=0 && isWall_Or_Nothing((*display).at(i-1).at(j-1))) ? thefloor[i-1][j-1] : nullptr;
-           Tile *southeast=(i+1<height && j+1<width && !isWall_Or_Nothing((*display).at(i+1).at(j+1)))?thefloor[i+1][j+1]:nullptr;
-           Tile *southwest=(i+1<height && j-1>=0 && !isWall_Or_Nothing((*display).at(i+1).at(j-1)))?thefloor[i+1][j-1]:nullptr;
+           Tile *thetile=&thefloor[i][j]; 
            char ch=(*display).at(i).at(j);
-           Object *ob=translate(ch);
-           thetile->setObject(ob); 
-           ob->setPosition(thetile);
+           thetile->set_tile(i,j,ch);
+           
+           if (!is_floor_object(ch)) {
+            Object *ob=translate(ch);
+            thetile->setObject(ob);
+            ob->setPosition(thetile);
+           }
+           Tile *north=(i-1>=0 && is_valid_neighbour((*display).at(i-1).at(j)))? &thefloor[i-1][j]:nullptr;  // if outofrange or Wall then nullptr
+           Tile *south=(i+1<height && is_valid_neighbour((*display).at(i+1).at(j)))? &thefloor[i+1][j]:nullptr;
+           Tile *east=(j+1<width && is_valid_neighbour((*display).at(i).at(j+1)))? &thefloor[i][j+1]:nullptr;
+           Tile *west=(j-1>=0 && is_valid_neighbour((*display).at(i).at(j-1)))? &thefloor[i][j-1]:nullptr;
+           Tile *northeast=(i-1>=0 && j+1<width && is_valid_neighbour((*display).at(i-1).at(j+1)))? &thefloor[i-1][j+1]:nullptr;
+           Tile *northwest=(i-1>=0 && j-1>=0 && is_valid_neighbour((*display).at(i-1).at(j-1))) ? &thefloor[i-1][j-1] : nullptr;
+           Tile *southeast=(i+1<height && j+1<width && is_valid_neighbour((*display).at(i+1).at(j+1)))?&thefloor[i+1][j+1]:nullptr;
+           Tile *southwest=(i+1<height && j-1>=0 && is_valid_neighbour((*display).at(i+1).at(j-1)))?&thefloor[i+1][j-1]:nullptr;
+           
            if (ob->getType()=="hero") {
                theplayer=ob;
            } else if (ob->getType()=="stair") {
@@ -113,15 +127,15 @@ Floor::Floor(TextDisplay* tp):td{tp},theplayer{nullptr},thestair{nullptr}{
                enemies.push_back(ob);
            }      // maybe more needs to keep track of      
            
-           thetile->attach(northwest); // 0
-           thetile->attach(north);     // 1
-           thetile->attach(northeast); // 2
-           thetile->attach(east);      // 3
-           thetile->attach(southeast); // 4
-           thetile->attach(south);     // 5
+           thetile->attach(north);     // 0
+           thetile->attach(east);      // 1
+           thetile->attach(south);     // 2
+           thetile->attach(west);      // 3
+           thetile->attach(northwest); // 4
+           thetile->attach(northeast); // 5
            thetile->attach(southwest); // 6
-           thetile->attach(west);      // 7
-           thetile->attachTd(td);       
+           thetile->attach(southeast); // 7
+           thetile->attach_td(td);       
        }
     }
     

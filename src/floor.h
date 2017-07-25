@@ -13,8 +13,8 @@ class Floor {
    // int floor_num; // may not need it
     TextDisplay *td;
 	
-	vector<vector< Tile *>> thefloor;
-	vector<Enemey *> enemies;
+	vector<vector< Tile >> thefloor;
+	vector<Enemy *> enemies;
 	vector<Chamber *> chambers;
     Hero * theplayer;
     Object * thestair;

@@ -10,8 +10,8 @@ class Object {
 
 protected:
     // string name; 
-    const std::string type; // "enemy", "hero"
-    const char symbol; // @, H, C
+    const std::string type; // "Enemy", "Hero", "Gold", "Potion"
+    const char symbol; // @, H, C. 
     Tile * position;
     
 public:
