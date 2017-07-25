@@ -18,10 +18,9 @@ public:
 	TextDisplay(); // no use for now
 	~TextDisplay(); // no use for now
     vector<string> * getDisplay();
+    void change(int row, int col, char symbol);
     void addrow(const string line);
-	void notify(Tile &whoNotified) override;
 	
-    void set(const int r,const  int c,const char ch);
 	friend ostream &operator<<(ostream &out, const TextDisplay &td);
   //  friend Floor::Floor(int floor_num, TextDisplay *tp);
 };

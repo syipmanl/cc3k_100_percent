@@ -17,10 +17,8 @@ vector<string> *TextDisplay::getDisplay(){
     return &tdDisplay;
 }
 
-void TextDisplay::notify(Tile &whoNotified) {}
-
-void TextDisplay::set(const int r, const int c, const char ch) {
-    tdDisplay[r][c]=ch;
+void TextDisplay::change(int row, int col, char symbol) {
+	tdDisplay[row][col] = symbol;
 }
 
 ostream &operator<<(ostream &out, const TextDisplay &td) {
