@@ -105,7 +105,7 @@ bool Character::move(int index) {
             }
             else { // pick up gold, not a dragon hoard
                 Hero* hero = static_cast<Hero *>(this); // set the hero
-                int drop = static_cast<Gold*>(goalObj)->getGold(); // set the money
+                int drop = static_cast<Gold*>(goalObj)->getSize(); // set the money
                 hero->addGold(drop); // add the money!
                 delete goalObj; // delete the gold, had it's use
                 moved = true;

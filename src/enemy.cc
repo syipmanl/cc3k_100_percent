@@ -28,7 +28,7 @@ Human::Human() : Enemy(20, 20, 140, 'H', "Human", "Enemy", true){}
 
 Human::~Human(){}
 
-void Human::deadGold(){
+void Human::drop_gold(){
 	Gold *p1 = new NormalHoard();
 	Gold *p2 = new NormalHoard();
 	p1->setPosition(position);
@@ -45,39 +45,37 @@ void Human::deadGold(){
 
 
 Dwarf::Dwarf() : Enemy(20, 30, 100, 'W', "Dwarf", 'Enemy', true){}
-
 Dwarf::~Dwarf(){}
+Dwarf::regen(int n) {};
 
 
 Elf::Elf() : Enemy(30, 10, 140, 'E', "Elf", "Enemy", true){}
-
 Elf::~Elf(){}
+Elf::regen(int n) {};
 
 
 Orc::Orc() : Enemy(30, 25, 180, 'O', "Orc" "Enemy", true){}
-
 Orc::~Orc(){}
+Orc::regen(int n) {};
 
 Merchant::Merchant() : Enemy(70, 5, 30, 'M', "Merchant", "Enemy",false){}
-
 Merchant::~Merchant(){}
+Merchant::regen(int n) {};
 
-void Merchant::deadGold(){
+void Merchant::drop_gold(){
 	MerchantHoard* pile = new MerchantHoard();
 	pile->setPosition(position);
 	position->setObject(pile);
 }
 
 Halfling::Halfling() : Enemy(15, 20, 100, 'L', "Halfling", "Enemy", true){}
-
 Halfling::~Halfling(){}
+Halfling::regen(int n) {};
 
 // constructor with no hoard
 Dragon::Dragon() : Enemy(20, 20, 150, 'D', "Dragon", "Enemy", true), drag_hoard(NULL){}
-
 // constructor with hoard
 Dragon::Dragon(DragonHoard* hoard) : Enemy(20, 20, 150, "D", "Dragon", "enemy", true), drag_hoard(hoard) {}
-
 Dragon::~Dragon(){}
 
 DragonHoard* Dragon::getHoard(){
@@ -87,5 +85,7 @@ DragonHoard* Dragon::getHoard(){
 void Dragon::setHoard(DragonHoard* newhoard){
 	drag_hoard = newhoard;
 }
+Dragon::regen(int n) {};
 
 Enemy::~Enemy() {}
+

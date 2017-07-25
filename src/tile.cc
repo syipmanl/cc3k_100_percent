@@ -11,7 +11,7 @@ Object* Tile::getObject() {
     return theObject;
 }
 
-Tile* Tile::getNeighbour(index) {
+Tile* Tile::getNeighbour(int index) {
     return neighbours[index];
 }
 void Tile::set_tile(int new_row, int new_col, char new_symbol) {
