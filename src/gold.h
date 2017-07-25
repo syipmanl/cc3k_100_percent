@@ -44,9 +44,6 @@ public:
 	DragonHoard();
 	DragonHoard(Dragon* dragon);
 	~DragonHoard();
-	Dragon* getDragon();
-	void deleteDragon();
-	void setDragon(Dragon* drag);
 };
 
 #endif

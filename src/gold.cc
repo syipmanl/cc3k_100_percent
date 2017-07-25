@@ -44,15 +44,4 @@ DragonHoard::~DragonHoard(){
 	}
 	delete dragon;
 }
-Dragon* DragonHoard::getDragon(){
-	return dragon;
-}
-void DragonHoard::deleteDragon(){
-	dragon->getPosition()->setObject(NULL);
-	delete dragon;
-	dragon = NULL;
-}
-void DragonHoard::setDragon(Dragon* drag){
-	dragon = drag;
-}
 

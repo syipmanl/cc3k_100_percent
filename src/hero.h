@@ -37,7 +37,7 @@ public:
 	
 <<<<<<< HEAD
 =======
-    void HeroMove(string direction);
+
     
 >>>>>>> 8822aae6eb73b02e660eb9b51763cc62be58b903
 	virtual int getmaxHP();
