@@ -4,18 +4,22 @@
 #include "hero.h"
 #include "gold.h"
 #include "utilities.h"
+#include <math.h>
 
 using namespace std;
 
 Character::Character(int ATK, int DEF, int HP, 
-    int dif_atk, int dif_def, bool hit,
+    int dif_atk, int dif_def, bool hit, bool hostile,
     string race, char symbol, string type):
 
 Object(type, symbol), 
 
 ATK(ATK), DEF(DEF), HP(HP), dif_atk(dif_atk), 
-hit(hit), dif_def(dif_def), race(race) {}
+dif_def(dif_def), hit(hit), hostile(hostile), race(race) {}
 
+bool Character::getHostile() {
+    return hostile;
+}
 bool Character::getHit() {
     return hit;
 }
@@ -86,7 +90,7 @@ bool Character::move(int index) {
     Object* goalObj = goal->getObject(); // goalObj: goal's object
 
     char goalCh = goal->getSymbol(); // goalCh: goal's symbol
-    string goalType = goal->getType(); // goalType: goal's type
+    string goalType = goalObj->getType(); // goalType: goal's type
 
     bool moved; // true is moved, false is not moved
 
@@ -105,7 +109,7 @@ bool Character::move(int index) {
             }
             else { // pick up gold, not a dragon hoard
                 Hero* hero = static_cast<Hero *>(this); // set the hero
-                int drop = static_cast<Gold*>(goalObj)->getSize(); // set the money
+                int drop = static_cast<Gold*>(goalObj)->getAmt(); // set the money
                 hero->addGold(drop); // add the money!
                 delete goalObj; // delete the gold, had it's use
                 moved = true;
@@ -129,7 +133,7 @@ bool Character::move(int index) {
     }
     if (moved) {
         setPosition(goal); // new position is at goal
-        current->setObject(NULL); // old space points at null now
+        position->setObject(NULL); // old space points at null now
         goal->setObject(this);
     }  
     return moved;
@@ -154,11 +158,11 @@ bool Character::Damaged(int n){
     // stats for calculation
     int attack_stat = getAtk(); // attacker
     int defence_stat = defender->getDef(); // defender
-    int dmg = ceil((100 / (100 + DEF)) * ATK); // dmg if applied
+    int dmg = ceil((100 / (100 + defence_stat)) * attack_stat); // dmg if applied
     bool dead; // true if dead
     int hit_miss = rand() % 2;
 
-    if(defRace == "Merchant"){
+    if(def_Race == "Merchant"){
         bool hostile = defender->getHostile();
         if (Merchant::hostile) {
             hit = true;
@@ -191,8 +195,8 @@ bool Character::Damaged(int n){
 
     // vampire attacks dwarf: lose 5 hp
     // vampire attacks anyone else: get 5 hp
-    if(atkRace == "Vampire"){
-        if(defRace != "Dwarf"){
+    if(atk_Race == "Vampire"){
+        if(def_Race != "Dwarf"){
             HP += 5; // alex has to check if vampire hp = 0
         }
         else{

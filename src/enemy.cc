@@ -22,7 +22,7 @@ void Enemy::deadGold(){
 	position->setObject(pile);
 }
 
-Human::Human() : Enemy(20, 20, 140, 'H', "Human", "Enemy", true){}
+Human::Human() : Enemy(20, 20, 140, 'H', "Human", "Enemy", false, true){}
 
 Human::~Human(){}
 
@@ -42,19 +42,21 @@ void Human::drop_gold(){
 }
 
 
-Dwarf::Dwarf() : Enemy(20, 30, 100, 'W', "Dwarf", 'Enemy', true){}
+Dwarf::Dwarf() : Enemy(20, 30, 100, 'W', "Dwarf", 'Enemy', false, true){}
 Dwarf::~Dwarf(){}
 
 
-Elf::Elf() : Enemy(30, 10, 140, 'E', "Elf", "Enemy", true){}
+Elf::Elf() : Enemy(30, 10, 140, 'E', "Elf", "Enemy", false, true){}
 Elf::~Elf(){}
 
 
-Orc::Orc() : Enemy(30, 25, 180, 'O', "Orc" "Enemy", true){}
+Orc::Orc() : Enemy(30, 25, 180, 'O', "Orc" "Enemy", false, true){}
 Orc::~Orc(){}
 
-Merchant::Merchant() : Enemy(70, 5, 30, 'M', "Merchant", "Enemy",false){}
+bool Merchant::hostile = false;
+Merchant::Merchant() : Enemy(70, 5, 30, 'M', "Merchant", "Enemy",false, false){}
 Merchant::~Merchant(){}
+Merchant::getHostile
 
 void Merchant::drop_gold(){
 	MerchantHoard* pile = new MerchantHoard();
@@ -62,13 +64,13 @@ void Merchant::drop_gold(){
 	position->setObject(pile);
 }
 
-Halfling::Halfling() : Enemy(15, 20, 100, 'L', "Halfling", "Enemy", true){}
+Halfling::Halfling() : Enemy(15, 20, 100, 'L', "Halfling", "Enemy", false, true){}
 Halfling::~Halfling(){}
 
 // constructor with no hoard
-Dragon::Dragon() : Enemy(20, 20, 150, 'D', "Dragon", "Enemy", true), drag_hoard(NULL){}
+Dragon::Dragon() : Enemy(20, 20, 150, 'D', "Dragon", "Enemy", false, true), drag_hoard(NULL){}
 // constructor with hoard
-Dragon::Dragon(DragonHoard* hoard) : Enemy(20, 20, 150, 'D', "Dragon", "Enemy", true), drag_hoard(hoard) {}
+Dragon::Dragon(DragonHoard* hoard) : Enemy(20, 20, 150, 'D', "Dragon", "Enemy", false, true), drag_hoard(hoard) {}
 Dragon::~Dragon(){}
 
 DragonHoard* Dragon::getHoard(){

@@ -40,15 +40,15 @@ void Tile::change_td(char ch) {
 }
 
 
-void Tile::cascade_the_chamber(Chamber * thechamber){
-    for (auto each : neighbours) {
-        if (each && !each->inChamber) {
-            thechamber->addTile(each);
-            each->inChamber=true;
-            each->cascade_the_chamber(thechamber);
-        } 
-    }
-}
+// void Tile::cascade_the_chamber(Chamber * thechamber){
+//     for (auto each : neighbours) {
+//         if (each && !each->inChamber) {
+//             thechamber->addTile(each);
+//             each->inChamber=true;
+//             each->cascade_the_chamber(thechamber);
+//         } 
+//     }
+// }
 
 void Tile::setObject(Object *ob) {
    theObject = ob;

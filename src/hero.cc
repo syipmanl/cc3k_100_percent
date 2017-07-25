@@ -8,16 +8,16 @@ using namespace std;
 
 
 Hero::Hero(int maxHP, int ATK, int DEF,int gold, 
-		int dif_hp, int dif_atk, int dif_def,
-		int real_hp, int real_atk, int real_def, 
+		int dif_atk, int dif_def,
+		int real_atk, int real_def,
+		bool hit, bool 
 		char symbol, std::string type, std::string race):
 
-		Character(ATK, DEF,HP, symbol, type, race), 
-		maxHP(maxHP), ATK(ATK), DEF(DEF), 
-		dif_hp(dif_hp), dif_atk(dif_atk), dif_def(dif_def),
-		real_hp(real_hp), real_hp(real_atk), real_def(real_def),
-		gold(gold)
-			{}
+		Character(ATK, DEF, maxHP, dif_atk, dif_def, 
+			real_atk, real_def, 
+			hit, race, symbol, type), 
+		maxHP(maxHP), gold(gold), 
+		{}
 
 // return Hero MAX_HP
 int Hero::getmaxHP() {
@@ -99,20 +99,20 @@ void Hero::HeroMove(string direction){
 // 			{}
 
 // implementation for Shade
-Shade::Shade() : Hero(125, 25, 25, 0, 0, 0, 125, 25, 25, "@", "Hero", 'Shade') {};
+Shade::Shade() : Hero(125, 25, 25, 0, 0, 125, 25, 25, "@", "Hero", 'Shade') {};
 
 Shade::~Shade(){}
 
 
 
 // implementation for Drow
-Drow::Drow() : Hero(150, 25, 15, 0, 0, 0, 150, 25, 15, "@", "Hero", "Drow") {};
+Drow::Drow() : Hero(150, 25, 15, 0, 0, 150, 25, 15, "@", "Hero", "Drow") {};
 
 Drow::~Drow(){}
 
 
 // implementation for Vampire, no max, hence why it is zero
-Vampire::Vampire() : Hero(0, 25, 25, 0, 0, 0, 50, 25, 25,  "@", "Hero", "Vampire") {};
+Vampire::Vampire() : Hero(0, 25, 25, 0, 0, 50, 25, 25,  "@", "Hero", "Vampire") {};
 
 Vampire::~Vampire(){}
 
@@ -125,13 +125,13 @@ void Vampire::regen(int hp){
 
 
 // implmentation for Troll
-Troll::Troll() : Hero(120, 25, 15, 0, 0, 0, 120, 25, 15, "@", "Hero", "Troll",) {};
+Troll::Troll() : Hero(120, 25, 15, 0, 0, 120, 25, 15, "@", "Hero", "Troll",) {};
 
 Troll::~Troll(){}
 
 
 // implementation for Goblin
-Goblin::Goblin() : Hero(110, 15, 20, 0, 0, 0, 110, 15, 20, "@", "Hero", "Goblin") {};
+Goblin::Goblin() : Hero(110, 15, 20, 0, 0, 110, 15, 20, "@", "Hero", "Goblin") {};
 
 Goblin::~Goblin(){}
 
