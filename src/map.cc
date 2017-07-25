@@ -9,7 +9,7 @@ bool isboundary(const string);
 // check if the line is like
 // "|-----------------------------|"
 bool isboundary(const string line) {
-    int i=0;
+    unsigned int i=0;
     assert(line[i]=='|');
     ++i;
     for (;i<line.size()-1;i++) {
@@ -22,7 +22,7 @@ bool isboundary(const string line) {
 
 // return true is the line has any character other than 
 bool is_not_floor_object(const string line) {
-    for (int i=0;i<line.size();i++) {
+    for (unsigned int i=0;i<line.size();i++) {
         char c=line[i];
         if (c!='|'||c!='-'||c!=' '||c!='.'||c!='+'||c!='#') {
             return true;
