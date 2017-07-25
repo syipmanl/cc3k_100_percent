@@ -8,6 +8,7 @@ using namespace std;
 Enemy::Enemy(int ATK, int DEF, int HP, char symbol, string race, string type, bool hostile)
 			: Character(ATK, DEF, HP, 0, 0, false, symbol, race, type), hostile(hostile) {}
 
+Enemy::regen(int n) {};
 
 // default drop gold
 void Enemy::deadGold(){

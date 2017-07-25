@@ -16,7 +16,7 @@ Object(type, symbol),
 ATK(ATK), DEF(DEF), HP(HP), dif_atk(dif_atk), 
 hit(hit), dif_def(dif_def), race(race) {}
 
-int getHit() {
+bool Character::getHit() {
     return hit;
 }
 
@@ -43,7 +43,7 @@ string Character::getType() {
 
 // takes effect, modifies: dif_def/dif_atk -> DEF/ATK
 // remind to set zero when new floor
-void Character::usePotion(string effect) {
+void Character::usePotion(string effect, int maxHP) {
     if(effect == "RH") {
         HP = min(HP + 10, maxHP);
     }

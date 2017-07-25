@@ -19,6 +19,7 @@ public:
     bool inChamber; //
     char getSymbol();
     Object* getObject();
+    Tile * getNeighbour(index);
     void set_tile(int new_row,int new_col, char new_symbol); //
     void attach(Tile *new_neighbours); 
     void attach_td(TextDisplay *td);

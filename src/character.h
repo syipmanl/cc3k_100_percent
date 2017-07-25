@@ -24,7 +24,7 @@ public:
 	
 	virtual ~Character() = 0;
 	
-	virtual void getHit();
+	virtual bool getHit();
 
 	virtual int getAtk();
 	
@@ -36,7 +36,7 @@ public:
 
 	virtual std::string getType();
 
-	virtual void usePotion(string effect);
+	virtual void usePotion(string effect, int maxHP);
 
 	virtual bool Damaged(int n);
 	
