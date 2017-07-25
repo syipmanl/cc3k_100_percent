@@ -105,7 +105,7 @@ Floor::Floor(TextDisplay* tp):td{tp},theplayer{nullptr},thestair{nullptr}{
            char ch=(*display).at(i).at(j);
            thetile->set_tile(i,j,ch);
            
-           if (!is_floor_object(ch) {
+           if (!is_floor_object(ch)) {
             Object *ob=translate(ch);
             thetile->setObject(ob);
             ob->setPosition(thetile);
