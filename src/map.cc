@@ -88,8 +88,11 @@ Map::Map(ifstream & map_file) {
 	}
 }
 
-// for testing now
+// print out each floor
 ostream &operator<<(ostream &out,const Map &m) {
-    
+    for (auto each: m.floors) {
+        out << *each;
+    }
+    return out;
 }
 

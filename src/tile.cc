@@ -3,6 +3,8 @@
 
 using namespace std;
 
+
+
 char Tile::getSymbol() {
     return symbol;
 }
@@ -33,16 +35,17 @@ void Tile::attach_td(TextDisplay *new_td) {
     td = new_td;
 }
 
-void Tile::change_td(int row, int col, char ch) {
+void Tile::change_td(char ch) {
     td->change(row, col, ch);
 }
 
 
-void Tile::cascade_the_chamber(){
+void Tile::cascade_the_chamber(Chamber * thechamber){
     for (auto each : neighbours) {
-        if (each) {
+        if (each && !each->inChamber) {
+            thechamber->addTile(each);
             each->inChamber=true;
-            each->cascade_the_chamber();
+            each->cascade_the_chamber(thechamber);
         } 
     }
 }

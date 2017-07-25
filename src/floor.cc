@@ -5,6 +5,7 @@
 #include "object.h"
 #include "potion.h"
 #include "gold.h"
+
 #include <iostream>
 
 using namespace std;
@@ -42,54 +43,76 @@ bool is_floor_object(const char c) {
     }
 }
 
+bool is_enemy_object(const char c) {
+    if (c=='H'||c=='W'||c=='E'||c=='O'||c=='M'||c=='D') {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+bool is_gold_object(const char c) {
+    if (c=='0'||c=='1'||c=='2'||c=='3'||c=='4'||c=='5') {
+        return true;
+    } else {
+        return false;
+    }
+}
+bool is_potion_object(const char c) {
+    if (c=='6'||c=='7'||c=='8'||c=='9') {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+
 Object *translate(char ch) {
-     if (ch=='@') {
-        return new Hero;
-    } else if (ch=='H') {
-        return new Human("human")
+    if (ch=='H') {
+        return new Human;
     } else if (ch=='W') {
-        return new Dwarf("darf");
+        return new Dwarf;
     } else if (ch=='E') {
-        return new Elf("elf");
+        return new Elf;
     } else if (ch=='O') {
-        return new Orc("orc");
+        return new Orc;
     } else if (ch=='M') {
-        return new Merchant("merchant");
+        return new Merchant;
     } else if (ch=='D') {
-        return new Dragon("dragon");
+        return new Dragon;
     } else if (ch=='L') {
-        return new Halfing("halfing");
+        return new Halfling;
     } else if (ch=='0') {
-        return new Potion("potion_RH");
+        return new Potion("RH");
     } else if (ch=='1') {
-        return new Potion("potion_BA");
+        return new Potion("BA");
     } else if (ch=='2') {
-        return new Potion("potion_BD");
+        return new Potion("BD");
     } else if (ch=='3') {
-        return new Potion("potion_PH");
+        return new Potion("PH");
     } else if (ch=='4') { 
-        return new Potion("potion_WA");
-    } else if (ch=='5') {       
-        return new Potion("potion_WD");
+        return new Potion("WA");
+    } else if (ch=='5') {  
+        return new Potion("WD");
     } else if (ch=='6') {
-        return new Gold("normalhoard");
+        return new NormalHoard;
     } else if (ch=='7') { 
-        return new Gold("smallhoard");
+        return new SmallHoard;
     } else if (ch=='8') {
-        return new Gold("merchanthoard");
+        return new MerchantHoard;
     } else if (ch=='9') {
-        return new Gold("dragonhoard");
+        return new DragonHoard;
     } else {
         return nullptr;
     }
 }
 
-bool Floor::hasHero() {return (theplayer)?true:false;}
+bool Floor::hasHero() const {return (init_hero_pos)?true:false;}
 
 
 // Each Tile * will point to a valid Tile (no nullptr)
 // neighbours of a Tile will be nullptr if it is ' ' or '|' or '-' or '+' or '#' shown on textdisplay (the map initially load in)
-Floor::Floor(TextDisplay* tp):td{tp},theplayer{nullptr},thestair{nullptr}{
+Floor::Floor(TextDisplay* tp):td{tp},thestair{nullptr},init_hero_pos{nullptr},theplayer{nullptr}{
     
     // initalize thefloor using td
     vector<string> *display=td->getDisplay();
@@ -104,11 +127,19 @@ Floor::Floor(TextDisplay* tp):td{tp},theplayer{nullptr},thestair{nullptr}{
            Tile *thetile=&thefloor[i][j]; 
            char ch=(*display).at(i).at(j);
            thetile->set_tile(i,j,ch);
-           
-           if (!is_floor_object(ch)) {
+           if (ch=='@') {
+               init_hero_pos=thetile;
+           } else if (!is_floor_object(ch)) {
             Object *ob=translate(ch);
             thetile->setObject(ob);
             ob->setPosition(thetile);
+            if (is_enemy_object(ch)) {
+                enemies.push_back(ob);
+            } else if (is_gold_object(ch)) {
+                thetile->change_td('G');
+            } else if (is_potion_object(ch)) {
+                thetile->change_td('P');
+            }
            }
            Tile *north=(i-1>=0 && is_valid_neighbour((*display).at(i-1).at(j)))? &thefloor[i-1][j]:nullptr;  // if outofrange or Wall then nullptr
            Tile *south=(i+1<height && is_valid_neighbour((*display).at(i+1).at(j)))? &thefloor[i+1][j]:nullptr;
@@ -119,13 +150,6 @@ Floor::Floor(TextDisplay* tp):td{tp},theplayer{nullptr},thestair{nullptr}{
            Tile *southeast=(i+1<height && j+1<width && is_valid_neighbour((*display).at(i+1).at(j+1)))?&thefloor[i+1][j+1]:nullptr;
            Tile *southwest=(i+1<height && j-1>=0 && is_valid_neighbour((*display).at(i+1).at(j-1)))?&thefloor[i+1][j-1]:nullptr;
            
-           if (ob->getType()=="hero") {
-               theplayer=ob;
-           } else if (ob->getType()=="stair") {
-               thestair=ob;
-           } else if (ob->getType()=="enemy") {
-               enemies.push_back(ob);
-           }      // maybe more needs to keep track of      
            
            thetile->attach(north);     // 0
            thetile->attach(east);      // 1
@@ -142,20 +166,22 @@ Floor::Floor(TextDisplay* tp):td{tp},theplayer{nullptr},thestair{nullptr}{
     // initalize chambers
     for (int i=0; i<height;i++) {
         for (int j=0; j<width;j++) {
-            Tile *thetile=thefloor[i][j];
-           if (!thetile->inChamber && thetile) {
+            Tile *thetile=&thefloor[i][j];
+            char ch=thetile->getSymbol();
+           if (!thetile->inChamber && ch!='-' && ch!='|' && ch!=' ') {
                Chamber *A_chamber=new Chamber;
                A_chamber->addTile(thetile);
-               thetile->cascade_the_chamber(); 
+               thetile->cascade_the_chamber(A_chamber); 
                chambers.push_back(A_chamber);
            }
         }
     }
 }
 
+// return the index of chamber which the player is in initially, return -1 if no chamber has player
 int Floor::which_chamber_is_player_in() {
     for (int i=0;i<chambers.size();i++) {
-        if (chambers[i]->is_player_in_chamber()) return i;
+        if (chambers[i]->is_player_in_chamber(init_hero_pos)) return i;
     }
     return -1;
 }
@@ -164,6 +190,9 @@ char convert_num_into_char(int num) {
     return '0'+num;
 }
 
+void Floor::init(const string){}
+
+/*
 void Floor::init(const string herotype) {
         // generate character
     Hero *hero=generateHero(herotype);
@@ -245,7 +274,7 @@ void Floor::init(const string herotype) {
         int num_cham=rand() % chambers.size();
         chambers[num_cham]->set_object_randomly(enemy);
     }
-}
+}*/
 
 ostream &operator<<(ostream &out, const Floor &fl) {
     out<<*fl.td;

@@ -20,10 +20,9 @@ void Chamber::set_object_randomly(Object *ob) {
     }
 }
 
-bool Chamber::is_player_in_chamber() {
+bool Chamber::is_player_in_chamber(Tile * hero) {
     for (auto each: tiles) {
-      Info info=each->getInfo();
-      if (info.type=="hero") return true;
+        if (each==hero) return true;
     }
     return false;
 }

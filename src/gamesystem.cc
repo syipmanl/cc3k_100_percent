@@ -57,7 +57,7 @@ void chooseToPrintMap(Map * mp) {
         cout <<"It seems you load a non-empty map. Assume you are testing. Would you like to print the map?"<<endl;
     }
     if (is_input_yes()) {
-        mp->printmap();
+        cout << *mp;
     }
 }
 

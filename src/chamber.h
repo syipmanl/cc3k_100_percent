@@ -6,7 +6,7 @@ class Chamber {
 	
 public:
     //bool attachUniqueTile(Tile *);
-    bool is_player_in_chamber();
+    bool is_player_in_chamber(Tile *);
     int size();
     void set_object_randomly(Object *ob);
     void addTile(Tile *t);

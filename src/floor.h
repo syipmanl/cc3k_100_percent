@@ -14,14 +14,15 @@ class Floor {
     TextDisplay *td;
 	
 	vector<vector< Tile >> thefloor;
-	vector<Enemy *> enemies;
+	vector<Object *> enemies;
 	vector<Chamber *> chambers;
+    Tile * thestair;
+    Tile * init_hero_pos;
     Hero * theplayer;
-    Object * thestair;
     int which_chamber_is_player_in();
 
 public:
-    bool hasHero();
+    bool hasHero() const;
     Floor(TextDisplay* tp);
     void init(const string herotype);
 	Chamber * random_available_chamber();
