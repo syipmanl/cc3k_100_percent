@@ -8,7 +8,7 @@ using namespace std;
 Enemy::Enemy(int ATK, int DEF, int HP, char symbol, string race, string type, bool hostile)
 			: Character(ATK, DEF, HP, 0, 0, false, symbol, race, type), hostile(hostile) {}
 
-Enemy::regen(int n) {};
+void Enemy::regen(int n) {};
 
 // default drop gold
 void Enemy::deadGold(){
@@ -46,21 +46,21 @@ void Human::drop_gold(){
 
 Dwarf::Dwarf() : Enemy(20, 30, 100, 'W', "Dwarf", 'Enemy', true){}
 Dwarf::~Dwarf(){}
-Dwarf::regen(int n) {};
+void Dwarf::regen(int n) {};
 
 
 Elf::Elf() : Enemy(30, 10, 140, 'E', "Elf", "Enemy", true){}
 Elf::~Elf(){}
-Elf::regen(int n) {};
+void Elf::regen(int n) {};
 
 
 Orc::Orc() : Enemy(30, 25, 180, 'O', "Orc" "Enemy", true){}
 Orc::~Orc(){}
-Orc::regen(int n) {};
+void Orc::regen(int n) {};
 
 Merchant::Merchant() : Enemy(70, 5, 30, 'M', "Merchant", "Enemy",false){}
 Merchant::~Merchant(){}
-Merchant::regen(int n) {};
+void Merchant::regen(int n) {};
 
 void Merchant::drop_gold(){
 	MerchantHoard* pile = new MerchantHoard();
@@ -70,12 +70,12 @@ void Merchant::drop_gold(){
 
 Halfling::Halfling() : Enemy(15, 20, 100, 'L', "Halfling", "Enemy", true){}
 Halfling::~Halfling(){}
-Halfling::regen(int n) {};
+void Halfling::regen(int n) {};
 
 // constructor with no hoard
 Dragon::Dragon() : Enemy(20, 20, 150, 'D', "Dragon", "Enemy", true), drag_hoard(NULL){}
 // constructor with hoard
-Dragon::Dragon(DragonHoard* hoard) : Enemy(20, 20, 150, "D", "Dragon", "enemy", true), drag_hoard(hoard) {}
+Dragon::Dragon(DragonHoard* hoard) : Enemy(20, 20, 150, 'D', "Dragon", "Enemy", true), drag_hoard(hoard) {}
 Dragon::~Dragon(){}
 
 DragonHoard* Dragon::getHoard(){
@@ -85,7 +85,7 @@ DragonHoard* Dragon::getHoard(){
 void Dragon::setHoard(DragonHoard* newhoard){
 	drag_hoard = newhoard;
 }
-Dragon::regen(int n) {};
+void Dragon::regen(int n) {};
 
 Enemy::~Enemy() {}
 

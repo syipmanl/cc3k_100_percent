@@ -42,6 +42,8 @@ public:
 	
 	virtual bool Attack(Character* defender);
 
+	virtual CharacterMove(string direction);
+
 	virtual bool move(int index);
 
 	virtual void regen(int n) = 0;
