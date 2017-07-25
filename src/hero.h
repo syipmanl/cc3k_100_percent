@@ -21,7 +21,7 @@ protected:
 public: 
 	
 	// Hero constructor
-	   void Hero(int maxHP, int ATK, int DEF, int gold, int dif_hp, int dif_atk, int dif_def, int real_hp, int real_atk, int real_def, char symbol, std::__cxx11::string type, std::__cxx11::string race);
+	   Hero(int maxHP, int ATK, int DEF, int gold, int dif_hp, int dif_atk, int dif_def, int real_hp, int real_atk, int real_def, char symbol, std::__cxx11::string type, std::__cxx11::string race);
 	
 	// pure virtual to make abstract
 	virtual ~Hero() = 0;
