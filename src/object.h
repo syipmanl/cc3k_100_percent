@@ -17,7 +17,6 @@ protected:
 public:
     Object(std::string type, char symbol);
     virtual ~Object() = 0;
-    virtual std::string getRace() = 0;
     virtual char getSymbol();
     virtual string getType();
     virtual Tile* getPosition();
