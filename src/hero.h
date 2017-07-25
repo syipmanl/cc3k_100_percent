@@ -21,7 +21,7 @@ protected:
 public: 
 	
 	// Hero constructor
-	   void Hero(int maxHP, int ATK, int DEF, int gold, int dif_hp, int dif_atk, int dif_def, int real_hp, int real_atk, int real_def, char symbol, std::__cxx11::string type, std::__cxx11::string race);
+	Hero(int maxHP, int ATK, int DEF, int gold, int dif_hp, int dif_atk, int dif_def, int real_hp, int real_atk, int real_def, char symbol, std::__cxx11::string type, std::__cxx11::string race);
 	
 	// pure virtual to make abstract
 	virtual ~Hero() = 0;
@@ -63,7 +63,7 @@ class Vampire : public Hero{
 	public:
 		Vampire();
 		~Vampire();
-		void heal(int n) override;
+		void regen(int hp) override;
 };
 
 // Troll: 120 HP, 25 Atk, 15 Def, regain 5 HP every turn

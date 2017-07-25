@@ -117,8 +117,8 @@ Vampire::Vampire() : Hero(0, 25, 25, 0, 0, 0, 50, 25, 25,  "@", "Hero", "Vampire
 Vampire::~Vampire(){}
 
 // override Heal method since Vampire has no maximum HP
-void Vampire::regen(int n){
-	real_hp += n;
+void Vampire::regen(int hp){
+	real_hp += hp;
 }
 
 

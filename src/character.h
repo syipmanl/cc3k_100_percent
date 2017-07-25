@@ -13,13 +13,13 @@ protected:
 	int DEF;
 	int HP;
 	int dif_atk;
-	int dif_def
+	int dif_def;
 	bool hit;
 	const std::string race;
 
 public: 
 	
-	Character(int ATK, int DEF, int HP, int dif_atk, int dif_def, bool hit
+	Character(int ATK, int DEF, int HP, int dif_atk, int dif_def, bool hit,
 		std::string race, char symbol, std::string type);
 	
 	virtual ~Character() = 0;
@@ -36,7 +36,7 @@ public:
 
 	virtual std::string getType();
 
-	virtual Character::usePotion(string effect);
+	virtual void usePotion(string effect);
 
 	virtual bool Damaged(int n);
 	

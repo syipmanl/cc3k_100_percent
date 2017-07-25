@@ -7,15 +7,15 @@ char Tile::getSymbol() {
     return symbol;
 }
 
-void Tile::getObject() {
+Object* Tile::getObject() {
     return theObject;
 }
 
-Tile::set_Tile(const int new_row, const int new_col, const char new_symbol) {
+void Tile::set_tile(int new_row, int new_col, char new_symbol) {
     symbol = new_symbol;
     row = new_row;
     col = new_col;
-    neighbours = nullptr;
+    //neighbours = nullptr;
     td = nullptr;
     theObject = nullptr;
     inChamber = false;
@@ -26,7 +26,7 @@ void Tile::attach(Tile *new_neighbours) {
     neighbours.push_back(new_neighbours);
 }
 
-void attach_td(TextDisplay *new_td) {
+void Tile::attach_td(TextDisplay *new_td) {
     td = new_td;
 }
 
@@ -46,11 +46,11 @@ void Tile::cascade_the_chamber(){
 
 void Tile::setObject(Object *ob) {
    theObject = ob;
-   if (!object) {
-        td->set(row,col,theObject->getSymbol()); // td[row][column] = symbol
+   if (!theObject) {
+        td->change(row,col,theObject->getSymbol()); // td[row][column] = symbol
    }
-   else if(object) {
-        td->set(row, col, ch);
+   else if(theObject) {
+        td->change(row, col, symbol);
    }
 }
 

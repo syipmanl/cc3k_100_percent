@@ -3,9 +3,7 @@
 #include "enemy.h"
 #include "hero.h"
 #include "gold.h"
-#include "utilities"
-#include <iostream>
-#include <sstream>
+#include "utilities.h"
 
 using namespace std;
 
@@ -16,9 +14,9 @@ Character::Character(int ATK, int DEF, int HP,
 Object(type, symbol), 
 
 ATK(ATK), DEF(DEF), HP(HP), dif_atk(dif_atk), 
-bool hit, dif_def(dif_def), race(race) {}
+hit(hit), dif_def(dif_def), race(race) {}
 
-void getHit() {
+int getHit() {
     return hit;
 }
 

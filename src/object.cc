@@ -19,10 +19,10 @@ string Object::getType(){
 }
 
 void Object::setPosition(Tile * newpos) {
-    position = pos;
+    position = newpos;
 }
 
-Tile * getPosition() {
+Tile * Object::getPosition() {
 	return position;
 }
 
